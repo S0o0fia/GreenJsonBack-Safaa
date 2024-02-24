@@ -5959,6 +5959,13 @@
         ],
         "parameters": [
           {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/CourseType"
+            }
+          },
+          {
             "name": "language",
             "in": "header",
             "description": "ar for Arabic or en for English",
