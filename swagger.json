@@ -3954,17 +3954,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/CompetenciesVMListSwaggerOutput"
+                  "$ref": "#/components/schemas/CompetenciesVMPagedOutputSwaggerOutput"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CompetenciesVMListSwaggerOutput"
+                  "$ref": "#/components/schemas/CompetenciesVMPagedOutputSwaggerOutput"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CompetenciesVMListSwaggerOutput"
+                  "$ref": "#/components/schemas/CompetenciesVMPagedOutputSwaggerOutput"
                 }
               }
             }
@@ -4704,6 +4704,60 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CourseDetailsViewModelSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Course/CourseDetailsAndReviews/{id}": {
+      "get": {
+        "tags": [
+          "Course"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseDetailsAndReviewsSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseDetailsAndReviewsSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseDetailsAndReviewsSwaggerOutput"
                 }
               }
             }
@@ -6057,6 +6111,167 @@
         }
       }
     },
+    "/api/Course/TopCourses": {
+      "get": {
+        "tags": [
+          "Course"
+        ],
+        "parameters": [
+          {
+            "name": "top",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 4
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseDetailsInListVMListSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseDetailsInListVMListSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseDetailsInListVMListSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Course/GetCoursesPaginated": {
+      "get": {
+        "tags": [
+          "Course"
+        ],
+        "parameters": [
+          {
+            "name": "CategoryId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "nullable": true
+            }
+          },
+          {
+            "name": "IsFree",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "nullable": true
+            }
+          },
+          {
+            "name": "Level",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/CourseLevel"
+            }
+          },
+          {
+            "name": "Type",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/CourseType"
+            }
+          },
+          {
+            "name": "PageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "SortBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "IsSortAscending",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseDetailsInListVMPagedOutputSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseDetailsInListVMPagedOutputSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseDetailsInListVMPagedOutputSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/CourseCategory/{id}": {
       "get": {
         "tags": [
@@ -6472,6 +6687,105 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CategoryListCourseModelListSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/CourseCategory/TopCategories": {
+      "get": {
+        "tags": [
+          "CourseCategory"
+        ],
+        "parameters": [
+          {
+            "name": "top",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 3
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/TopCategoryListSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TopCategoryListSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TopCategoryListSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/CourseCategory/CategoriesInCourses": {
+      "get": {
+        "tags": [
+          "CourseCategory"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/FilterObjectViewListSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FilterObjectViewListSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FilterObjectViewListSwaggerOutput"
                 }
               }
             }
@@ -8612,345 +8926,6 @@
         }
       }
     },
-    "/api/ExternalCourse": {
-      "get": {
-        "tags": [
-          "ExternalCourse"
-        ],
-        "parameters": [
-          {
-            "name": "ExternalCourseID",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          {
-            "name": "ExternalCourseName",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          {
-            "name": "Organization",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          {
-            "name": "PageNumber",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "PageSize",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "SortBy",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          {
-            "name": "IsSortAscending",
-            "in": "query",
-            "schema": {
-              "type": "boolean"
-            }
-          },
-          {
-            "name": "language",
-            "in": "header",
-            "description": "ar for Arabic or en for English",
-            "required": true,
-            "schema": {
-              "enum": [
-                "en",
-                "ar"
-              ],
-              "type": "string",
-              "default": "en"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ExternalCourseVMPagedOutputSwaggerOutput"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ExternalCourseVMPagedOutputSwaggerOutput"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ExternalCourseVMPagedOutputSwaggerOutput"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "ExternalCourse"
-        ],
-        "parameters": [
-          {
-            "name": "language",
-            "in": "header",
-            "description": "ar for Arabic or en for English",
-            "required": true,
-            "schema": {
-              "enum": [
-                "en",
-                "ar"
-              ],
-              "type": "string",
-              "default": "en"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/ExternalCourseVM"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ExternalCourseVM"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ExternalCourseVM"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/ExternalCourseVM"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "ExternalCourse"
-        ],
-        "parameters": [
-          {
-            "name": "language",
-            "in": "header",
-            "description": "ar for Arabic or en for English",
-            "required": true,
-            "schema": {
-              "enum": [
-                "en",
-                "ar"
-              ],
-              "type": "string",
-              "default": "en"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/ExternalCourseVM"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ExternalCourseVM"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ExternalCourseVM"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/ExternalCourseVM"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/GuidSwaggerOutput"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GuidSwaggerOutput"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GuidSwaggerOutput"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "ExternalCourse"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          {
-            "name": "language",
-            "in": "header",
-            "description": "ar for Arabic or en for English",
-            "required": true,
-            "schema": {
-              "enum": [
-                "en",
-                "ar"
-              ],
-              "type": "string",
-              "default": "en"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/ExternalCourse/{id}": {
-      "get": {
-        "tags": [
-          "ExternalCourse"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          {
-            "name": "language",
-            "in": "header",
-            "description": "ar for Arabic or en for English",
-            "required": true,
-            "schema": {
-              "enum": [
-                "en",
-                "ar"
-              ],
-              "type": "string",
-              "default": "en"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ExternalCourseVMSwaggerOutput"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ExternalCourseVMSwaggerOutput"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ExternalCourseVMSwaggerOutput"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/Instructor/GetProgramByInstructorId": {
       "get": {
         "tags": [
@@ -9967,6 +9942,51 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/EnumValueListSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Instructor/InstructorsFilterList": {
+      "get": {
+        "tags": [
+          "Instructor"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/FilterObjectViewListSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FilterObjectViewListSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FilterObjectViewListSwaggerOutput"
                 }
               }
             }
@@ -11134,6 +11154,86 @@
         }
       }
     },
+    "/api/Modules/ScheduleAndModule": {
+      "get": {
+        "tags": [
+          "Modules"
+        ],
+        "parameters": [
+          {
+            "name": "StudentId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "nullable": true
+            }
+          },
+          {
+            "name": "ModuleId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "nullable": true
+            }
+          },
+          {
+            "name": "ScheduleId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "nullable": true
+            }
+          },
+          {
+            "name": "IsFinishOnly",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "nullable": true
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduleModuleVMIEnumerableSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduleModuleVMIEnumerableSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduleModuleVMIEnumerableSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Nationalities": {
       "get": {
         "tags": [
@@ -11686,6 +11786,345 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/NotificationViewModelSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Organization": {
+      "get": {
+        "tags": [
+          "Organization"
+        ],
+        "parameters": [
+          {
+            "name": "OrganizationID",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "OrganizationName",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "OrganizationReference",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "PageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "SortBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "IsSortAscending",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationVMPagedOutputSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationVMPagedOutputSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationVMPagedOutputSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Organization"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrganizationVM"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrganizationVM"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrganizationVM"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrganizationVM"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Organization"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrganizationVM"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrganizationVM"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrganizationVM"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrganizationVM"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuidSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuidSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuidSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Organization"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Organization/{id}": {
+      "get": {
+        "tags": [
+          "Organization"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationVMSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationVMSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationVMSwaggerOutput"
                 }
               }
             }
@@ -12286,6 +12725,114 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ProgramDDViewModelListSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Program/TopPrograms": {
+      "get": {
+        "tags": [
+          "Program"
+        ],
+        "parameters": [
+          {
+            "name": "top",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 4
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/TopProgramVMListSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TopProgramVMListSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TopProgramVMListSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Program/ProgramDetailsAndReviews/{id}": {
+      "get": {
+        "tags": [
+          "Program"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProgramDetailsAndReviewsSwaggerOutputSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProgramDetailsAndReviewsSwaggerOutputSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProgramDetailsAndReviewsSwaggerOutputSwaggerOutput"
                 }
               }
             }
@@ -15494,6 +16041,256 @@
         }
       }
     },
+    "/api/Review": {
+      "get": {
+        "tags": [
+          "Review"
+        ],
+        "parameters": [
+          {
+            "name": "ReviewId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "nullable": true
+            }
+          },
+          {
+            "name": "CourseId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "nullable": true
+            }
+          },
+          {
+            "name": "ProgramId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "nullable": true
+            }
+          },
+          {
+            "name": "ReviewContent",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "Rate",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "StudentId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "nullable": true
+            }
+          },
+          {
+            "name": "PageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "SortBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "IsSortAscending",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReviewVMPagedOutputSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReviewVMPagedOutputSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReviewVMPagedOutputSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Review"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReviewInputDTO"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReviewInputDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReviewInputDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReviewInputDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationState"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationState"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationState"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Review/{reviewId}": {
+      "delete": {
+        "tags": [
+          "Review"
+        ],
+        "parameters": [
+          {
+            "name": "reviewId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationState"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationState"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationState"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/RoleActions/filter": {
       "post": {
         "tags": [
@@ -15943,7 +16740,89 @@
         }
       }
     },
-    "/api/Roles/filter": {
+    "/api/Roles": {
+      "get": {
+        "tags": [
+          "Roles"
+        ],
+        "parameters": [
+          {
+            "name": "Text",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "PageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "SortBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "IsSortAscending",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoleFilterByTextInputViewModelPagedOutputSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoleFilterByTextInputViewModelPagedOutputSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoleFilterByTextInputViewModelPagedOutputSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
         "tags": [
           "Roles"
@@ -15968,22 +16847,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/RoleFilterByTextInputViewModel"
+                "$ref": "#/components/schemas/AddEditRoleViewModel"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RoleFilterByTextInputViewModel"
+                "$ref": "#/components/schemas/AddEditRoleViewModel"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/RoleFilterByTextInputViewModel"
+                "$ref": "#/components/schemas/AddEditRoleViewModel"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/RoleFilterByTextInputViewModel"
+                "$ref": "#/components/schemas/AddEditRoleViewModel"
               }
             }
           }
@@ -15994,144 +16873,20 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/RoleInfoViewModelPagedOutput"
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RoleInfoViewModelPagedOutput"
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RoleInfoViewModelPagedOutput"
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
                 }
               }
             }
-          }
-        }
-      }
-    },
-    "/api/Roles/{id}": {
-      "get": {
-        "tags": [
-          "Roles"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          {
-            "name": "language",
-            "in": "header",
-            "description": "ar for Arabic or en for English",
-            "required": true,
-            "schema": {
-              "enum": [
-                "en",
-                "ar"
-              ],
-              "type": "string",
-              "default": "en"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Roles"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          {
-            "name": "language",
-            "in": "header",
-            "description": "ar for Arabic or en for English",
-            "required": true,
-            "schema": {
-              "enum": [
-                "en",
-                "ar"
-              ],
-              "type": "string",
-              "default": "en"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/api/Roles": {
-      "post": {
-        "tags": [
-          "Roles"
-        ],
-        "parameters": [
-          {
-            "name": "language",
-            "in": "header",
-            "description": "ar for Arabic or en for English",
-            "required": true,
-            "schema": {
-              "enum": [
-                "en",
-                "ar"
-              ],
-              "type": "string",
-              "default": "en"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddEditRoleViewModel"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddEditRoleViewModel"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddEditRoleViewModel"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddEditRoleViewModel"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
           }
         }
       },
@@ -16181,7 +16936,175 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Roles/GetRoleDropDown": {
+      "get": {
+        "tags": [
+          "Roles"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoleDDVMListSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoleDDVMListSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoleDDVMListSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Roles/{id}": {
+      "get": {
+        "tags": [
+          "Roles"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoleDetailVMSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoleDetailVMSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoleDetailVMSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Roles"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              }
+            }
           }
         }
       }
@@ -17315,75 +18238,6 @@
         }
       }
     },
-    "/api/StudentAdmin/acceptanceletter1": {
-      "post": {
-        "tags": [
-          "StudentAdmin"
-        ],
-        "parameters": [
-          {
-            "name": "language",
-            "in": "header",
-            "description": "ar for Arabic or en for English",
-            "required": true,
-            "schema": {
-              "enum": [
-                "en",
-                "ar"
-              ],
-              "type": "string",
-              "default": "en"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/StudentAcceptLetterInputViewModel"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/StudentAcceptLetterInputViewModel"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/StudentAcceptLetterInputViewModel"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/StudentAcceptLetterInputViewModel"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/StringSwaggerOutput"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/StringSwaggerOutput"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/StringSwaggerOutput"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/StudentAdmin/sendacceptanceletter": {
       "post": {
         "tags": [
@@ -17446,6 +18300,75 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/StudentAdmin/AcceptanceLetterPDF": {
+      "post": {
+        "tags": [
+          "StudentAdmin"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StudentAcceptLetterInputViewModel"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StudentAcceptLetterInputViewModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StudentAcceptLetterInputViewModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StudentAcceptLetterInputViewModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ByteArraySwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ByteArraySwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ByteArraySwaggerOutput"
                 }
               }
             }
@@ -18240,6 +19163,75 @@
         }
       }
     },
+    "/api/StudentAdmin/admissionform": {
+      "post": {
+        "tags": [
+          "StudentAdmin"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StudentInputViewModel"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StudentInputViewModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StudentInputViewModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StudentInputViewModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/StudentCourses/UpdateStatus": {
       "post": {
         "tags": [
@@ -18520,6 +19512,60 @@
           {
             "name": "id",
             "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/StudentInProgram/UpdateIsFinish/{programId}": {
+      "put": {
+        "tags": [
+          "StudentInProgram"
+        ],
+        "parameters": [
+          {
+            "name": "programId",
+            "in": "path",
+            "required": true,
             "schema": {
               "type": "string",
               "format": "uuid"
@@ -20426,6 +21472,60 @@
         }
       }
     },
+    "/api/Students/UpdateIsFinish/{courseId}": {
+      "put": {
+        "tags": [
+          "Students"
+        ],
+        "parameters": [
+          {
+            "name": "courseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/SystemPageActions/filter": {
       "post": {
         "tags": [
@@ -21089,6 +22189,51 @@
         }
       }
     },
+    "/api/SystemPages/GetPagesForRole": {
+      "get": {
+        "tags": [
+          "SystemPages"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemPageWithActionVMListSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemPageWithActionVMListSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemPageWithActionVMListSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/UserRoles/filter": {
       "post": {
         "tags": [
@@ -21721,6 +22866,43 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/Users/{id}": {
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
           }
         }
       }
@@ -22358,6 +23540,148 @@
           }
         }
       }
+    },
+    "/api/Video/VideoWebHook": {
+      "post": {
+        "tags": [
+          "Video"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebHookData"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebHookData"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebHookData"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebHookData"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Video": {
+      "post": {
+        "tags": [
+          "Video"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "string",
+                "nullable": true
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "string",
+                "nullable": true
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "string",
+                "nullable": true
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -22782,7 +24106,9 @@
           10,
           11,
           12,
-          13
+          13,
+          14,
+          15
         ],
         "type": "integer",
         "format": "int32"
@@ -24000,7 +25326,7 @@
         },
         "additionalProperties": false
       },
-      "RequiredExternalCourseVM": {
+      "OrganizationCoursesVM": {
         "type": "object",
         "properties": {
           "courseName": {
@@ -24155,10 +25481,10 @@
             },
             "nullable": true
           },
-          "externalCourse": {
+          "organizationCourses": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/RequiredExternalCourseVM"
+              "$ref": "#/components/schemas/OrganizationCoursesVM"
             },
             "nullable": true
           },
@@ -24331,7 +25657,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "withdrawnEmployees": {
+          "withdrawnListCount": {
             "type": "integer",
             "format": "int32"
           }
@@ -24472,6 +25798,9 @@
             "type": "number",
             "format": "double",
             "nullable": true
+          },
+          "isMandatory": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -24581,6 +25910,9 @@
             "type": "number",
             "format": "double",
             "nullable": true
+          },
+          "isMandatory": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -24671,6 +26003,9 @@
             "type": "number",
             "format": "double",
             "nullable": true
+          },
+          "isMandatory": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -25479,7 +26814,24 @@
         },
         "additionalProperties": false
       },
-      "CompetenciesVMListSwaggerOutput": {
+      "CompetenciesVMPagedOutput": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CompetenciesVM"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CompetenciesVMPagedOutputSwaggerOutput": {
         "type": "object",
         "properties": {
           "statusCode": {
@@ -25494,11 +26846,7 @@
             "type": "boolean"
           },
           "result": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CompetenciesVM"
-            },
-            "nullable": true
+            "$ref": "#/components/schemas/CompetenciesVMPagedOutput"
           }
         },
         "additionalProperties": false
@@ -25708,6 +27056,29 @@
         },
         "additionalProperties": false
       },
+      "OrganizationVM": {
+        "type": "object",
+        "properties": {
+          "organizationId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "organizationName": {
+            "type": "string",
+            "nullable": true
+          },
+          "organizationReference": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "CourseDetailsViewModel": {
         "type": "object",
         "properties": {
@@ -25758,9 +27129,16 @@
           },
           "subCategoryId": {
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "nullable": true
+          },
+          "level": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           },
           "ranks": {
+            "uniqueItems": true,
             "type": "array",
             "items": {
               "type": "string",
@@ -25818,6 +27196,9 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          },
+          "organization": {
+            "$ref": "#/components/schemas/OrganizationVM"
           }
         },
         "additionalProperties": false
@@ -25838,6 +27219,216 @@
           },
           "result": {
             "$ref": "#/components/schemas/CourseDetailsViewModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LessonListViewModel": {
+        "type": "object",
+        "properties": {
+          "lessonId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "lessonIndex": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "videoURL": {
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ModuleVM": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "topic": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "lessons": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LessonListViewModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReviewVM": {
+        "type": "object",
+        "properties": {
+          "reviewId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "courseId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "programId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "reviewContent": {
+            "type": "string",
+            "nullable": true
+          },
+          "rate": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "studentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "studentName": {
+            "type": "string",
+            "nullable": true
+          },
+          "courseName": {
+            "type": "string",
+            "nullable": true
+          },
+          "programTitle": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StarsCount": {
+        "type": "object",
+        "properties": {
+          "reviewsCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "stars": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReviewStats": {
+        "type": "object",
+        "properties": {
+          "topReviews": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReviewVM"
+            },
+            "nullable": true
+          },
+          "starsCounts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StarsCount"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CourseDetailsAndReviews": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "imageUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "price": {
+            "type": "number",
+            "format": "double"
+          },
+          "modules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ModuleVM"
+            },
+            "nullable": true
+          },
+          "organization": {
+            "$ref": "#/components/schemas/OrganizationVM"
+          },
+          "objectives": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "enrolledStudents": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "reviewStats": {
+            "$ref": "#/components/schemas/ReviewStats"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CourseDetailsAndReviewsSwaggerOutput": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "$ref": "#/components/schemas/CourseDetailsAndReviews"
           }
         },
         "additionalProperties": false
@@ -25926,6 +27517,11 @@
           "courseId": {
             "type": "string",
             "format": "uuid"
+          },
+          "organization": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
           },
           "requiredOtherCourses": {
             "type": "array",
@@ -26016,9 +27612,21 @@
           },
           "subCategoryId": {
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "nullable": true
+          },
+          "organization": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "level": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           },
           "ranks": {
+            "uniqueItems": true,
             "type": "array",
             "items": {
               "type": "string",
@@ -26062,6 +27670,9 @@
           "status": {
             "type": "integer",
             "format": "int32"
+          },
+          "isTop": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -26084,6 +27695,9 @@
           "categoryName": {
             "type": "string",
             "nullable": true
+          },
+          "organization": {
+            "$ref": "#/components/schemas/OrganizationVM"
           },
           "totalStudent": {
             "type": "integer",
@@ -26122,6 +27736,7 @@
             "format": "int32"
           },
           "ranks": {
+            "uniqueItems": true,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RankServiceVM"
@@ -26276,6 +27891,145 @@
         },
         "additionalProperties": false
       },
+      "CourseLevel": {
+        "enum": [
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "CourseDetailsInListVM": {
+        "type": "object",
+        "properties": {
+          "courseId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "objectives": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/CourseType"
+          },
+          "levelId": {
+            "$ref": "#/components/schemas/CourseLevel"
+          },
+          "levelName": {
+            "type": "string",
+            "nullable": true
+          },
+          "isFree": {
+            "type": "boolean"
+          },
+          "mainPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "specialPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "specialValidTill": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "courseImage": {
+            "type": "string",
+            "nullable": true
+          },
+          "lessonsCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "studentsCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "avgRate": {
+            "type": "number",
+            "format": "double"
+          },
+          "reviewsCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CourseDetailsInListVMListSwaggerOutput": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CourseDetailsInListVM"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CourseDetailsInListVMPagedOutput": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CourseDetailsInListVM"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CourseDetailsInListVMPagedOutputSwaggerOutput": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "$ref": "#/components/schemas/CourseDetailsInListVMPagedOutput"
+          }
+        },
+        "additionalProperties": false
+      },
       "CourseCategoryDetailViewModel": {
         "type": "object",
         "properties": {
@@ -26346,6 +28100,9 @@
             "type": "string",
             "format": "uuid",
             "nullable": true
+          },
+          "isTop": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -26507,6 +28264,94 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CategoryListCourseModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TopCategory": {
+        "type": "object",
+        "properties": {
+          "courseCategoryId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "categoryImage": {
+            "type": "string",
+            "nullable": true
+          },
+          "studentsCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lessonsCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TopCategoryListSwaggerOutput": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TopCategory"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FilterObjectView": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FilterObjectViewListSwaggerOutput": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterObjectView"
             },
             "nullable": true
           }
@@ -27177,86 +29022,6 @@
           "status": {
             "type": "integer",
             "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ExternalCourseVM": {
-        "type": "object",
-        "properties": {
-          "externalCourseId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "externalCourseName": {
-            "type": "string",
-            "nullable": true
-          },
-          "organization": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ExternalCourseVMPagedOutput": {
-        "type": "object",
-        "properties": {
-          "totalCount": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "result": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ExternalCourseVM"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ExternalCourseVMPagedOutputSwaggerOutput": {
-        "type": "object",
-        "properties": {
-          "statusCode": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "ok": {
-            "type": "boolean"
-          },
-          "result": {
-            "$ref": "#/components/schemas/ExternalCourseVMPagedOutput"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ExternalCourseVMSwaggerOutput": {
-        "type": "object",
-        "properties": {
-          "statusCode": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "ok": {
-            "type": "boolean"
-          },
-          "result": {
-            "$ref": "#/components/schemas/ExternalCourseVM"
           }
         },
         "additionalProperties": false
@@ -28066,6 +29831,9 @@
             "type": "number",
             "format": "double",
             "nullable": true
+          },
+          "isMandatory": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -28126,6 +29894,9 @@
             "type": "number",
             "format": "double",
             "nullable": true
+          },
+          "isMandatory": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -28191,6 +29962,9 @@
               "$ref": "#/components/schemas/AssignmentInstructorStudent"
             },
             "nullable": true
+          },
+          "isMandatory": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -28254,6 +30028,18 @@
         },
         "additionalProperties": false
       },
+      "VideoStatus": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
       "StudentLessonNoteListViewModel": {
         "type": "object",
         "properties": {
@@ -28279,6 +30065,27 @@
           "videoURL": {
             "type": "string",
             "nullable": true
+          },
+          "videoerrorCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "videofailedReason": {
+            "type": "string",
+            "nullable": true
+          },
+          "videotimestamp": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "videoprogress": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "videoStatus": {
+            "$ref": "#/components/schemas/VideoStatus"
           },
           "lessonIndex": {
             "type": "integer",
@@ -28377,35 +30184,6 @@
           "moduleId": {
             "type": "string",
             "format": "uuid"
-          }
-        },
-        "additionalProperties": false
-      },
-      "LessonListViewModel": {
-        "type": "object",
-        "properties": {
-          "lessonId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "title": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "lessonIndex": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "videoURL": {
-            "type": "string",
-            "nullable": true
-          },
-          "isActive": {
-            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -28704,6 +30482,65 @@
           },
           "result": {
             "$ref": "#/components/schemas/ModuleStudentDetail"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ScheduleModuleVM": {
+        "type": "object",
+        "properties": {
+          "courseName": {
+            "type": "string",
+            "nullable": true
+          },
+          "programName": {
+            "type": "string",
+            "nullable": true
+          },
+          "moduleName": {
+            "type": "string",
+            "nullable": true
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "instructorName": {
+            "type": "string",
+            "nullable": true
+          },
+          "isFinish": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ScheduleModuleVMIEnumerableSwaggerOutput": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ScheduleModuleVM"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -29035,6 +30872,63 @@
         },
         "additionalProperties": false
       },
+      "OrganizationVMPagedOutput": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrganizationVM"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrganizationVMPagedOutputSwaggerOutput": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "$ref": "#/components/schemas/OrganizationVMPagedOutput"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrganizationVMSwaggerOutput": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "$ref": "#/components/schemas/OrganizationVM"
+          }
+        },
+        "additionalProperties": false
+      },
       "ProgramTimeSetupViewModel": {
         "type": "object",
         "properties": {
@@ -29314,6 +31208,197 @@
               "$ref": "#/components/schemas/ProgramDDViewModel"
             },
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TopProgramVM": {
+        "type": "object",
+        "properties": {
+          "programId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "programTitle": {
+            "type": "string",
+            "nullable": true
+          },
+          "courseId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "timeSetups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProgramTimeSetupViewModel"
+            },
+            "nullable": true
+          },
+          "objectives": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/CourseType"
+          },
+          "levelId": {
+            "$ref": "#/components/schemas/CourseLevel"
+          },
+          "levelName": {
+            "type": "string",
+            "nullable": true
+          },
+          "isFree": {
+            "type": "boolean"
+          },
+          "mainPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "specialPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "specialValidTill": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "courseImage": {
+            "type": "string",
+            "nullable": true
+          },
+          "lessonsCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "studentsCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "averageRate": {
+            "type": "number",
+            "format": "double"
+          },
+          "reviewsCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TopProgramVMListSwaggerOutput": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TopProgramVM"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProgramDetailsAndReviews": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "enrolledStudents": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "reviewStats": {
+            "$ref": "#/components/schemas/ReviewStats"
+          },
+          "course": {
+            "$ref": "#/components/schemas/CourseDetailsAndReviews"
+          },
+          "timeSetups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProgramTimeSetupViewModel"
+            },
+            "nullable": true
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProgramDetailsAndReviewsSwaggerOutput": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "$ref": "#/components/schemas/ProgramDetailsAndReviews"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProgramDetailsAndReviewsSwaggerOutputSwaggerOutput": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "$ref": "#/components/schemas/ProgramDetailsAndReviewsSwaggerOutput"
           }
         },
         "additionalProperties": false
@@ -30861,6 +32946,71 @@
         },
         "additionalProperties": false
       },
+      "ReviewVMPagedOutput": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReviewVM"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReviewVMPagedOutputSwaggerOutput": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "$ref": "#/components/schemas/ReviewVMPagedOutput"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReviewInputDTO": {
+        "type": "object",
+        "properties": {
+          "reviewId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "courseId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "programId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "reviewContent": {
+            "type": "string",
+            "nullable": true
+          },
+          "rate": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "RoleActionFilterByTextInputViewModel": {
         "type": "object",
         "properties": {
@@ -30986,35 +33136,7 @@
         },
         "additionalProperties": false
       },
-      "RoleInfoViewModel": {
-        "type": "object",
-        "properties": {
-          "roleId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "roleArabicName": {
-            "type": "string",
-            "nullable": true
-          },
-          "roleEnglishName": {
-            "type": "string",
-            "nullable": true
-          },
-          "pagesCount": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "usersCount": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "RoleInfoViewModelPagedOutput": {
+      "RoleFilterByTextInputViewModelPagedOutput": {
         "type": "object",
         "properties": {
           "totalCount": {
@@ -31024,9 +33146,29 @@
           "result": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/RoleInfoViewModel"
+              "$ref": "#/components/schemas/RoleFilterByTextInputViewModel"
             },
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RoleFilterByTextInputViewModelPagedOutputSwaggerOutput": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "$ref": "#/components/schemas/RoleFilterByTextInputViewModelPagedOutput"
           }
         },
         "additionalProperties": false
@@ -31039,13 +33181,105 @@
             "format": "uuid",
             "nullable": true
           },
-          "roleArabicName": {
+          "roleName": {
             "type": "string",
             "nullable": true
           },
-          "roleEnglishName": {
+          "roleDescription": {
             "type": "string",
             "nullable": true
+          },
+          "actionsId": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RoleDDVM": {
+        "type": "object",
+        "properties": {
+          "roleId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "roleName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RoleDDVMListSwaggerOutput": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RoleDDVM"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RoleDetailVM": {
+        "type": "object",
+        "properties": {
+          "roleId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "roleName": {
+            "type": "string",
+            "nullable": true
+          },
+          "roleDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "actionsId": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RoleDetailVMSwaggerOutput": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "$ref": "#/components/schemas/RoleDetailVM"
           }
         },
         "additionalProperties": false
@@ -32326,6 +34560,73 @@
           },
           "result": {
             "$ref": "#/components/schemas/CourseStudentsViewOutPutModelPagedOutput"
+          }
+        },
+        "additionalProperties": false
+      },
+      "StudentInputViewModel": {
+        "type": "object",
+        "properties": {
+          "studentId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "englishFirstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "arabicFirstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "englishFamilyName": {
+            "type": "string",
+            "nullable": true
+          },
+          "arabicFamilyName": {
+            "type": "string",
+            "nullable": true
+          },
+          "englishFullName": {
+            "type": "string",
+            "nullable": true
+          },
+          "arabicFullName": {
+            "type": "string",
+            "nullable": true
+          },
+          "cvpdf": {
+            "type": "string",
+            "nullable": true
+          },
+          "nationalIDImage": {
+            "type": "string",
+            "nullable": true
+          },
+          "mobile": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "attendingClass": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "newCVPDF": {
+            "$ref": "#/components/schemas/PuzzleFileInfo"
+          },
+          "newNationalIDImage": {
+            "$ref": "#/components/schemas/PuzzleFileInfo"
+          },
+          "newUniversityDegreeCert": {
+            "$ref": "#/components/schemas/PuzzleFileInfo"
+          },
+          "newIELTSCertificate": {
+            "$ref": "#/components/schemas/PuzzleFileInfo"
           }
         },
         "additionalProperties": false
@@ -33872,6 +36173,9 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
+          },
+          "isMandatory": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -34235,6 +36539,70 @@
         },
         "additionalProperties": false
       },
+      "SystemPageActionByPageVM": {
+        "type": "object",
+        "properties": {
+          "systemPageActionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "actionName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SystemPageWithActionVM": {
+        "type": "object",
+        "properties": {
+          "systemPageActionId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "pageName": {
+            "type": "string",
+            "nullable": true
+          },
+          "systemPageId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "actions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SystemPageActionByPageVM"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SystemPageWithActionVMListSwaggerOutput": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SystemPageWithActionVM"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "UserRoleFilterByTextInputViewModel": {
         "type": "object",
         "properties": {
@@ -34380,6 +36748,14 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          },
+          "roleids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -34437,6 +36813,14 @@
             "format": "int32",
             "nullable": true
           },
+          "roleIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "nullable": true
+          },
           "userImage": {
             "$ref": "#/components/schemas/PuzzleFileInfo"
           }
@@ -34458,7 +36842,7 @@
             "type": "string",
             "nullable": true
           },
-          "role": {
+          "type": {
             "$ref": "#/components/schemas/AuthUserType"
           },
           "email": {
@@ -34471,6 +36855,17 @@
           },
           "isActive": {
             "type": "boolean",
+            "nullable": true
+          },
+          "creationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
             "nullable": true
           }
         },
@@ -34610,6 +37005,41 @@
           },
           "userImage": {
             "$ref": "#/components/schemas/PuzzleFileInfo"
+          }
+        },
+        "additionalProperties": false
+      },
+      "WebHookData": {
+        "type": "object",
+        "properties": {
+          "userToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "videoId": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "$ref": "#/components/schemas/VideoStatus"
+          },
+          "errorCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "failedReason": {
+            "type": "string",
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "progress": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         },
         "additionalProperties": false
