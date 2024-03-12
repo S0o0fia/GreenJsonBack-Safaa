@@ -3444,6 +3444,51 @@
         }
       }
     },
+    "/api/CertificationTemplate": {
+      "get": {
+        "tags": [
+          "CertificationTemplate"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatListViewModelListSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatListViewModelListSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatListViewModelListSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Chat/HasUnReadMessage": {
       "get": {
         "tags": [
@@ -5443,6 +5488,75 @@
         }
       }
     },
+    "/api/Course/UpdateCourseCertificate": {
+      "put": {
+        "tags": [
+          "Course"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CourseCertificateViewModel"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CourseCertificateViewModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CourseCertificateViewModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CourseCertificateViewModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Course/UpdateSeo": {
       "put": {
         "tags": [
@@ -6172,11 +6286,26 @@
         ],
         "parameters": [
           {
-            "name": "CategoryId",
+            "name": "Categories",
             "in": "query",
             "schema": {
-              "type": "string",
-              "format": "uuid",
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "nullable": true
+            }
+          },
+          {
+            "name": "Instructors",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "uuid"
+              },
               "nullable": true
             }
           },
@@ -6200,6 +6329,18 @@
             "in": "query",
             "schema": {
               "$ref": "#/components/schemas/CourseType"
+            }
+          },
+          {
+            "name": "Rate",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "nullable": true
             }
           },
           {
@@ -25179,7 +25320,8 @@
           1,
           2,
           3,
-          4
+          4,
+          5
         ],
         "type": "integer",
         "format": "int32"
@@ -26577,26 +26719,6 @@
         },
         "additionalProperties": false
       },
-      "BooleanSwaggerOutput": {
-        "type": "object",
-        "properties": {
-          "statusCode": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "ok": {
-            "type": "boolean"
-          },
-          "result": {
-            "type": "boolean"
-          }
-        },
-        "additionalProperties": false
-      },
       "ChatListViewModel": {
         "type": "object",
         "properties": {
@@ -26646,6 +26768,26 @@
               "$ref": "#/components/schemas/ChatListViewModel"
             },
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BooleanSwaggerOutput": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -27097,6 +27239,16 @@
             },
             "nullable": true
           },
+          "certificateTemplate": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "isNeedApprove": {
+            "type": "boolean"
+          },
           "shortDescription": {
             "type": "string",
             "nullable": true
@@ -27409,6 +27561,10 @@
           },
           "reviewStats": {
             "$ref": "#/components/schemas/ReviewStats"
+          },
+          "language": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -27800,6 +27956,26 @@
         },
         "additionalProperties": false
       },
+      "CourseCertificateViewModel": {
+        "type": "object",
+        "properties": {
+          "courseId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "isNeedApprove": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
       "CourseSeoInputViewModel": {
         "type": "object",
         "properties": {
@@ -27907,6 +28083,15 @@
             "type": "string",
             "format": "uuid"
           },
+          "categoryId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "categoryName": {
+            "type": "string",
+            "nullable": true
+          },
           "name": {
             "type": "string",
             "nullable": true
@@ -27965,6 +28150,10 @@
           "reviewsCount": {
             "type": "integer",
             "format": "int32"
+          },
+          "language": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -31296,6 +31485,10 @@
           "reviewsCount": {
             "type": "integer",
             "format": "int32"
+          },
+          "language": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -31359,6 +31552,10 @@
           "endDate": {
             "type": "string",
             "format": "date-time"
+          },
+          "language": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -33378,7 +33575,8 @@
           11,
           12,
           13,
-          14
+          14,
+          15
         ],
         "type": "integer",
         "format": "int32"
