@@ -16586,17 +16586,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReviewVMPagedOutputSwaggerOutput"
+                  "$ref": "#/components/schemas/ReviewVMSwaggerOutput"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReviewVMPagedOutputSwaggerOutput"
+                  "$ref": "#/components/schemas/ReviewVMSwaggerOutput"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReviewVMPagedOutputSwaggerOutput"
+                  "$ref": "#/components/schemas/ReviewVMSwaggerOutput"
                 }
               }
             }
@@ -33835,6 +33835,26 @@
           "rate": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReviewVMSwaggerOutput": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "$ref": "#/components/schemas/ReviewVM"
           }
         },
         "additionalProperties": false
