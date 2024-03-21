@@ -9150,6 +9150,23 @@
         ],
         "parameters": [
           {
+            "name": "ID",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "nullable": true
+            }
+          },
+          {
+            "name": "EmpolyeeName",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
             "name": "PageNumber",
             "in": "query",
             "schema": {
@@ -9212,6 +9229,176 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/EvaluationListVMPagedOutputSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/EmployeeEvaluation/EvaluationsNoteList": {
+      "get": {
+        "tags": [
+          "EmployeeEvaluation"
+        ],
+        "parameters": [
+          {
+            "name": "EmpolyeeEvaluationId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "nullable": true
+            }
+          },
+          {
+            "name": "PageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "SortBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "IsSortAscending",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationListNoteVMPagedOutputSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationListNoteVMPagedOutputSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationListNoteVMPagedOutputSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/EmployeeEvaluation/EvaluationsRatingList": {
+      "get": {
+        "tags": [
+          "EmployeeEvaluation"
+        ],
+        "parameters": [
+          {
+            "name": "EmpolyeeEvaluationId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "nullable": true
+            }
+          },
+          {
+            "name": "PageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "SortBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "IsSortAscending",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationListRatingVMPagedOutputSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationListRatingVMPagedOutputSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationListRatingVMPagedOutputSwaggerOutput"
                 }
               }
             }
@@ -30810,6 +30997,10 @@
             "type": "string",
             "format": "uuid"
           },
+          "employeeId": {
+            "type": "string",
+            "format": "uuid"
+          },
           "employeeName": {
             "type": "string",
             "nullable": true
@@ -30882,6 +31073,136 @@
           },
           "result": {
             "$ref": "#/components/schemas/EvaluationListVMPagedOutput"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EvaluationListNoteVM": {
+        "type": "object",
+        "properties": {
+          "employeeEvaluationNoteId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "employeeEvaluationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "note": {
+            "type": "string",
+            "nullable": true
+          },
+          "noteDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "noteFiles": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EvaluationListNoteVMPagedOutput": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvaluationListNoteVM"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EvaluationListNoteVMPagedOutputSwaggerOutput": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "$ref": "#/components/schemas/EvaluationListNoteVMPagedOutput"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EvaluationListRatingVM": {
+        "type": "object",
+        "properties": {
+          "employeeEvaluationvaluationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "employeeEvaluationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "evaluationType": {
+            "type": "string",
+            "nullable": true
+          },
+          "evaluationFile": {
+            "type": "string",
+            "nullable": true
+          },
+          "note": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EvaluationListRatingVMPagedOutput": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvaluationListRatingVM"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EvaluationListRatingVMPagedOutputSwaggerOutput": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "$ref": "#/components/schemas/EvaluationListRatingVMPagedOutput"
           }
         },
         "additionalProperties": false
