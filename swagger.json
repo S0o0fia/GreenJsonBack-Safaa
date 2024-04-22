@@ -3444,6 +3444,151 @@
         }
       }
     },
+    "/api/BigBlueButton/isBigBlueButtonAPISettingsOKAsync": {
+      "get": {
+        "tags": [
+          "BigBlueButton"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/BigBlueButton/GetDefaultConfigXML": {
+      "get": {
+        "tags": [
+          "BigBlueButton"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/BigBlueButton/Create": {
+      "get": {
+        "tags": [
+          "BigBlueButton"
+        ],
+        "parameters": [
+          {
+            "name": "meetingID",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/BigBlueButton/Recordings": {
+      "get": {
+        "tags": [
+          "BigBlueButton"
+        ],
+        "parameters": [
+          {
+            "name": "meetingID",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/CertificationTemplate": {
       "get": {
         "tags": [
@@ -6225,60 +6370,6 @@
         }
       }
     },
-    "/api/Course/TopCourses": {
-      "get": {
-        "tags": [
-          "Course"
-        ],
-        "parameters": [
-          {
-            "name": "top",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "default": 4
-            }
-          },
-          {
-            "name": "language",
-            "in": "header",
-            "description": "ar for Arabic or en for English",
-            "required": true,
-            "schema": {
-              "enum": [
-                "en",
-                "ar"
-              ],
-              "type": "string",
-              "default": "en"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/CourseDetailsInListVMListSwaggerOutput"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CourseDetailsInListVMListSwaggerOutput"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CourseDetailsInListVMListSwaggerOutput"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/Course/GetCoursesPaginated": {
       "get": {
         "tags": [
@@ -6287,18 +6378,6 @@
         "parameters": [
           {
             "name": "Categories",
-            "in": "query",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "format": "uuid"
-              },
-              "nullable": true
-            }
-          },
-          {
-            "name": "Instructors",
             "in": "query",
             "schema": {
               "type": "array",
@@ -6340,6 +6419,14 @@
                 "type": "integer",
                 "format": "int32"
               },
+              "nullable": true
+            }
+          },
+          {
+            "name": "IsTop",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
               "nullable": true
             }
           },
@@ -9199,7 +9286,6 @@
             "in": "query",
             "schema": {
               "type": "string",
-              "format": "uuid",
               "nullable": true
             }
           },
@@ -9230,19 +9316,28 @@
             }
           },
           {
-            "name": "Year",
+            "name": "PerformanceCharter",
             "in": "query",
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "nullable": true
             }
           },
           {
-            "name": "Date",
+            "name": "DepartmentId",
             "in": "query",
             "schema": {
               "type": "string",
-              "format": "date-time",
+              "format": "uuid",
+              "nullable": true
+            }
+          },
+          {
+            "name": "Year",
+            "in": "query",
+            "schema": {
+              "type": "string",
               "nullable": true
             }
           },
@@ -9585,7 +9680,7 @@
         }
       }
     },
-    "/api/EmployeeEvaluation/MyEvaluationPerformanceCharterStatus/{evaluationId}/{performanceCharterStatusId}": {
+    "/api/EmployeeEvaluation/MyEvaluationPerformanceCharterStatus/{evaluationId}": {
       "put": {
         "tags": [
           "EmployeeEvaluation"
@@ -9598,14 +9693,6 @@
             "schema": {
               "type": "string",
               "format": "uuid"
-            }
-          },
-          {
-            "name": "performanceCharterStatusId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/PerformanceCharterStatus"
             }
           },
           {
@@ -9629,17 +9716,71 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                  "$ref": "#/components/schemas/StringSwaggerOutput"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                  "$ref": "#/components/schemas/StringSwaggerOutput"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                  "$ref": "#/components/schemas/StringSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/EmployeeEvaluation/MyEvaluationEmployeeEvaluationStatus/{evaluationId}": {
+      "put": {
+        "tags": [
+          "EmployeeEvaluation"
+        ],
+        "parameters": [
+          {
+            "name": "evaluationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringSwaggerOutput"
                 }
               }
             }
@@ -9881,6 +10022,144 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/EmployeeEvaluation/AddWithFile": {
+      "post": {
+        "tags": [
+          "EmployeeEvaluation"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeEvaluationInputVM"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeEvaluationInputVM"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeEvaluationInputVM"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeEvaluationInputVM"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmployeeEvaluationExcelFileOutputSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmployeeEvaluationExcelFileOutputSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmployeeEvaluationExcelFileOutputSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/EmployeeEvaluation/UpdateWithFile": {
+      "put": {
+        "tags": [
+          "EmployeeEvaluation"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeEvaluationInputVM"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeEvaluationInputVM"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeEvaluationInputVM"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeEvaluationInputVM"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringSwaggerOutput"
                 }
               }
             }
@@ -10251,6 +10530,276 @@
         }
       }
     },
+    "/api/EmployeeEvaluation/SendNotificationToStartEvaluation/{employeeid}": {
+      "put": {
+        "tags": [
+          "EmployeeEvaluation"
+        ],
+        "parameters": [
+          {
+            "name": "employeeid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/EmployeeEvaluation/ApprovePerformanceCharterStatus/{evaluationId}": {
+      "put": {
+        "tags": [
+          "EmployeeEvaluation"
+        ],
+        "parameters": [
+          {
+            "name": "evaluationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/EmployeeEvaluation/ApproveEvaluationStatus/{evaluationId}": {
+      "put": {
+        "tags": [
+          "EmployeeEvaluation"
+        ],
+        "parameters": [
+          {
+            "name": "evaluationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/EmployeeEvaluation/RejectPerformanceCharterStatus/{evaluationId}": {
+      "put": {
+        "tags": [
+          "EmployeeEvaluation"
+        ],
+        "parameters": [
+          {
+            "name": "evaluationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/EmployeeEvaluation/RejectEvaluationStatus/{evaluationId}": {
+      "put": {
+        "tags": [
+          "EmployeeEvaluation"
+        ],
+        "parameters": [
+          {
+            "name": "evaluationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/EmployeeEvaluationNotes": {
       "post": {
         "tags": [
@@ -10431,6 +10980,60 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/EmployeeEvaluationNotes/Get/{id}": {
+      "get": {
+        "tags": [
+          "EmployeeEvaluationNotes"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmployeeEvaluationNoteVMSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmployeeEvaluationNoteVMSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmployeeEvaluationNoteVMSwaggerOutput"
                 }
               }
             }
@@ -10621,6 +11224,60 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/EmployeeEvaluationValuation/Get/{id}": {
+      "get": {
+        "tags": [
+          "EmployeeEvaluationValuation"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmployeeEvaluationValuationVMSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmployeeEvaluationValuationVMSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmployeeEvaluationValuationVMSwaggerOutput"
                 }
               }
             }
@@ -14434,60 +15091,6 @@
         }
       }
     },
-    "/api/Program/TopPrograms": {
-      "get": {
-        "tags": [
-          "Program"
-        ],
-        "parameters": [
-          {
-            "name": "top",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "default": 4
-            }
-          },
-          {
-            "name": "language",
-            "in": "header",
-            "description": "ar for Arabic or en for English",
-            "required": true,
-            "schema": {
-              "enum": [
-                "en",
-                "ar"
-              ],
-              "type": "string",
-              "default": "en"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/TopProgramVMListSwaggerOutput"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TopProgramVMListSwaggerOutput"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TopProgramVMListSwaggerOutput"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/Program/ProgramDetailsAndReviews/{id}": {
       "get": {
         "tags": [
@@ -14535,6 +15138,140 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ProgramDetailsAndReviewsSwaggerOutputSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Program/GetProgramsPaginated": {
+      "get": {
+        "tags": [
+          "Program"
+        ],
+        "parameters": [
+          {
+            "name": "Categories",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "nullable": true
+            }
+          },
+          {
+            "name": "Instructors",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "nullable": true
+            }
+          },
+          {
+            "name": "Level",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/CourseLevel"
+            }
+          },
+          {
+            "name": "Type",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/ProgramType"
+            }
+          },
+          {
+            "name": "Rate",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "nullable": true
+            }
+          },
+          {
+            "name": "IsTop",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "nullable": true
+            }
+          },
+          {
+            "name": "PageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "SortBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "IsSortAscending",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProgramDetailsInListPagedOutputSwaggerOutputSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProgramDetailsInListPagedOutputSwaggerOutputSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProgramDetailsInListPagedOutputSwaggerOutputSwaggerOutput"
                 }
               }
             }
@@ -28757,6 +29494,9 @@
             "type": "number",
             "format": "double"
           },
+          "isSuccess": {
+            "type": "boolean"
+          },
           "startAssignmentDate": {
             "type": "string",
             "format": "date-time",
@@ -29559,7 +30299,10 @@
             "nullable": true
           },
           "topic": {
-            "type": "string",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
             "nullable": true
           },
           "description": {
@@ -29571,72 +30314,6 @@
             "items": {
               "$ref": "#/components/schemas/LessonListViewModel"
             },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ReviewVM": {
-        "type": "object",
-        "properties": {
-          "reviewId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "courseId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "programId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "moduleId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "instructorId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "instructorRate": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "reviewContent": {
-            "type": "string",
-            "nullable": true
-          },
-          "rate": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "studentId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "instructorName": {
-            "type": "string",
-            "nullable": true
-          },
-          "moduleName": {
-            "type": "string",
-            "nullable": true
-          },
-          "studentName": {
-            "type": "string",
-            "nullable": true
-          },
-          "courseName": {
-            "type": "string",
-            "nullable": true
-          },
-          "programTitle": {
-            "type": "string",
             "nullable": true
           }
         },
@@ -29656,25 +30333,14 @@
         },
         "additionalProperties": false
       },
-      "ReviewStats": {
-        "type": "object",
-        "properties": {
-          "topReviews": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ReviewVM"
-            },
-            "nullable": true
-          },
-          "starsCounts": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StarsCount"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
+      "CourseLevel": {
+        "enum": [
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
       },
       "CourseDetailsAndReviews": {
         "type": "object",
@@ -29720,10 +30386,75 @@
             "type": "integer",
             "format": "int32"
           },
-          "reviewStats": {
-            "$ref": "#/components/schemas/ReviewStats"
+          "starsCounts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StarsCount"
+            },
+            "nullable": true
           },
           "language": {
+            "type": "string",
+            "nullable": true
+          },
+          "courseId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "categoryId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "categoryName": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/CourseType"
+          },
+          "levelId": {
+            "$ref": "#/components/schemas/CourseLevel"
+          },
+          "levelName": {
+            "type": "string",
+            "nullable": true
+          },
+          "isFree": {
+            "type": "boolean"
+          },
+          "mainPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "specialPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "specialValidTill": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lessonsCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "studentsCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "avgRate": {
+            "type": "number",
+            "format": "double"
+          },
+          "reviewsCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "videoUrl": {
             "type": "string",
             "nullable": true
           }
@@ -30225,15 +30956,6 @@
         },
         "additionalProperties": false
       },
-      "CourseLevel": {
-        "enum": [
-          1,
-          2,
-          3
-        ],
-        "type": "integer",
-        "format": "int32"
-      },
       "CourseDetailsInListVM": {
         "type": "object",
         "properties": {
@@ -30311,30 +31033,6 @@
           },
           "language": {
             "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "CourseDetailsInListVMListSwaggerOutput": {
-        "type": "object",
-        "properties": {
-          "statusCode": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "ok": {
-            "type": "boolean"
-          },
-          "result": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CourseDetailsInListVM"
-            },
             "nullable": true
           }
         },
@@ -31490,7 +32188,8 @@
         "properties": {
           "employeeEvaluationId": {
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "nullable": true
           },
           "employeeId": {
             "type": "string",
@@ -31506,15 +32205,18 @@
           },
           "jobTypeId": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "evaluationDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           },
           "performanceCharterStatusId": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "performanceCharterStatus": {
             "type": "string",
@@ -31522,15 +32224,25 @@
           },
           "employeeEvaluationStatusId": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "employeeEvaluationStatus": {
             "type": "string",
             "nullable": true
           },
-          "lastModificarionDate": {
+          "employeeNationalId": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
+          },
+          "department": {
+            "type": "string",
+            "nullable": true
+          },
+          "creationUser": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -31702,6 +32414,75 @@
         },
         "additionalProperties": false
       },
+      "EvaluationDegree": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "EmployeeEvaluationCompetenciesVM": {
+        "type": "object",
+        "properties": {
+          "employeeEvaluationCompetenciesId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "competenciesId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "degree": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "competenciesName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EvaluationResultSection": {
+        "type": "object",
+        "properties": {
+          "achievingGoalDegree": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "achievingCompetencyDegree": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "lastResult": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "evaluationDegree": {
+            "$ref": "#/components/schemas/EvaluationDegree"
+          },
+          "lastEvaluationFile": {
+            "type": "string",
+            "nullable": true
+          },
+          "employeeEvaluationCompetencies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EmployeeEvaluationCompetenciesVM"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "EmployeeEvaluationDetails": {
         "type": "object",
         "properties": {
@@ -31709,7 +32490,7 @@
             "type": "string",
             "format": "uuid"
           },
-          "creationDate": {
+          "evaluationDate": {
             "type": "string",
             "format": "date-time"
           },
@@ -31732,18 +32513,25 @@
             "type": "string",
             "nullable": true
           },
-          "evaluationResultSection": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
           "performanceCharterFile": {
             "type": "string",
             "nullable": true
           },
-          "lastEvaluationFile": {
+          "note": {
             "type": "string",
             "nullable": true
+          },
+          "canUpdateStatus": {
+            "type": "boolean"
+          },
+          "canUpdateEvaluationStatus": {
+            "type": "boolean"
+          },
+          "showEvaluationResultSection": {
+            "type": "boolean"
+          },
+          "evaluationResultSection": {
+            "$ref": "#/components/schemas/EvaluationResultSection"
           }
         },
         "additionalProperties": false
@@ -31768,15 +32556,38 @@
         },
         "additionalProperties": false
       },
-      "PerformanceCharterStatus": {
-        "enum": [
-          0,
-          1,
-          2,
-          3
-        ],
-        "type": "integer",
-        "format": "int32"
+      "LessonFiles": {
+        "type": "object",
+        "properties": {
+          "fileId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "fileName": {
+            "type": "string",
+            "nullable": true
+          },
+          "fileURL": {
+            "type": "string",
+            "nullable": true
+          },
+          "newFileURL": {
+            "$ref": "#/components/schemas/PuzzleFileInfo"
+          },
+          "forLecture": {
+            "type": "boolean"
+          },
+          "fileOrignalName": {
+            "type": "string",
+            "nullable": true
+          },
+          "fileType": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "EmployeeEvaluationCompetenciesInputVM": {
         "type": "object",
@@ -31840,6 +32651,14 @@
             "type": "integer",
             "format": "int32"
           },
+          "performanceCharterStatusText": {
+            "type": "string",
+            "nullable": true
+          },
+          "employeeEvaluationStatusText": {
+            "type": "string",
+            "nullable": true
+          },
           "creationDate": {
             "type": "string",
             "format": "date-time"
@@ -31871,6 +32690,19 @@
           },
           "resultNote": {
             "type": "string",
+            "nullable": true
+          },
+          "canChangePerformanceCharterStatus": {
+            "type": "boolean"
+          },
+          "canChangeEvaluationStatus": {
+            "type": "boolean"
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LessonFiles"
+            },
             "nullable": true
           },
           "competencies": {
@@ -31942,12 +32774,51 @@
             "type": "string",
             "nullable": true
           },
+          "performanceCharterStatus": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "newPerformanceCharterFile": {
             "$ref": "#/components/schemas/PuzzleFileInfo"
           },
           "note": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EmployeeEvaluationExcelFileOutput": {
+        "type": "object",
+        "properties": {
+          "employeeEvaluationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "fileUrl": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EmployeeEvaluationExcelFileOutputSwaggerOutput": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "$ref": "#/components/schemas/EmployeeEvaluationExcelFileOutput"
           }
         },
         "additionalProperties": false
@@ -31978,6 +32849,13 @@
           "evaluationDegree": {
             "type": "integer",
             "format": "int32",
+            "nullable": true
+          },
+          "resultFiles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LessonFiles"
+            },
             "nullable": true
           },
           "resultNote": {
@@ -32032,12 +32910,65 @@
           "noteFiles": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/PuzzleFileInfo"
+              "$ref": "#/components/schemas/LessonFiles"
             },
             "nullable": true
           },
           "note": {
             "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EmployeeEvaluationNoteVM": {
+        "type": "object",
+        "properties": {
+          "employeeEvaluationNoteId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "employeeEvaluationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "noteDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "noteFiles": {
+            "type": "string",
+            "nullable": true
+          },
+          "note": {
+            "type": "string",
+            "nullable": true
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LessonFiles"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EmployeeEvaluationNoteVMSwaggerOutput": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "$ref": "#/components/schemas/EmployeeEvaluationNoteVM"
           }
         },
         "additionalProperties": false
@@ -32081,6 +33012,66 @@
           },
           "isLastEvaluation": {
             "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EmployeeEvaluationValuationVM": {
+        "type": "object",
+        "properties": {
+          "employeeEvaluationvaluationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "employeeEvaluationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "evaluationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "evaluationType": {
+            "$ref": "#/components/schemas/EvaluationType"
+          },
+          "evaluationTypeNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "evaluationFile": {
+            "type": "string",
+            "nullable": true
+          },
+          "isLastEvaluation": {
+            "type": "boolean"
+          },
+          "note": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EmployeeEvaluationValuationVMSwaggerOutput": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "$ref": "#/components/schemas/EmployeeEvaluationValuationVM"
           }
         },
         "additionalProperties": false
@@ -32411,39 +33402,6 @@
             "items": {
               "$ref": "#/components/schemas/LectureOutputViewModel"
             },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "LessonFiles": {
-        "type": "object",
-        "properties": {
-          "fileId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "fileName": {
-            "type": "string",
-            "nullable": true
-          },
-          "fileURL": {
-            "type": "string",
-            "nullable": true
-          },
-          "newFileURL": {
-            "$ref": "#/components/schemas/PuzzleFileInfo"
-          },
-          "forLecture": {
-            "type": "boolean"
-          },
-          "fileOrignalName": {
-            "type": "string",
-            "nullable": true
-          },
-          "fileType": {
-            "type": "string",
             "nullable": true
           }
         },
@@ -33781,7 +34739,9 @@
           60,
           61,
           62,
-          63
+          63,
+          64,
+          65
         ],
         "type": "integer",
         "format": "int32"
@@ -34280,7 +35240,163 @@
         },
         "additionalProperties": false
       },
-      "TopProgramVM": {
+      "ProgramDetailsAndReviews": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "enrolledStudents": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "starsCounts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StarsCount"
+            },
+            "nullable": true
+          },
+          "course": {
+            "$ref": "#/components/schemas/CourseDetailsAndReviews"
+          },
+          "timeSetups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProgramTimeSetupViewModel"
+            },
+            "nullable": true
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "language": {
+            "type": "string",
+            "nullable": true
+          },
+          "programId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "programTitle": {
+            "type": "string",
+            "nullable": true
+          },
+          "courseId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "objectives": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/CourseType"
+          },
+          "levelId": {
+            "$ref": "#/components/schemas/CourseLevel"
+          },
+          "levelName": {
+            "type": "string",
+            "nullable": true
+          },
+          "courseImage": {
+            "type": "string",
+            "nullable": true
+          },
+          "lessonsCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "studentsCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "averageRate": {
+            "type": "number",
+            "format": "double"
+          },
+          "reviewsCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "durationInDays": {
+            "type": "number",
+            "format": "double"
+          },
+          "videoUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "joinable": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProgramDetailsAndReviewsSwaggerOutput": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "$ref": "#/components/schemas/ProgramDetailsAndReviews"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProgramDetailsAndReviewsSwaggerOutputSwaggerOutput": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "$ref": "#/components/schemas/ProgramDetailsAndReviewsSwaggerOutput"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProgramType": {
+        "enum": [
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "ProgramDetailsInList": {
         "type": "object",
         "properties": {
           "programId": {
@@ -34327,24 +35443,6 @@
             "type": "string",
             "nullable": true
           },
-          "isFree": {
-            "type": "boolean"
-          },
-          "mainPrice": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "specialPrice": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "specialValidTill": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
           "courseImage": {
             "type": "string",
             "nullable": true
@@ -34368,78 +35466,35 @@
           "language": {
             "type": "string",
             "nullable": true
+          },
+          "durationInDays": {
+            "type": "number",
+            "format": "double"
+          },
+          "joinable": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
       },
-      "TopProgramVMListSwaggerOutput": {
+      "ProgramDetailsInListPagedOutput": {
         "type": "object",
         "properties": {
-          "statusCode": {
+          "totalCount": {
             "type": "integer",
             "format": "int32"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "ok": {
-            "type": "boolean"
           },
           "result": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/TopProgramVM"
+              "$ref": "#/components/schemas/ProgramDetailsInList"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "ProgramDetailsAndReviews": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "title": {
-            "type": "string",
-            "nullable": true
-          },
-          "enrolledStudents": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "reviewStats": {
-            "$ref": "#/components/schemas/ReviewStats"
-          },
-          "course": {
-            "$ref": "#/components/schemas/CourseDetailsAndReviews"
-          },
-          "timeSetups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ProgramTimeSetupViewModel"
-            },
-            "nullable": true
-          },
-          "startDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "endDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "language": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ProgramDetailsAndReviewsSwaggerOutput": {
+      "ProgramDetailsInListPagedOutputSwaggerOutput": {
         "type": "object",
         "properties": {
           "statusCode": {
@@ -34454,12 +35509,12 @@
             "type": "boolean"
           },
           "result": {
-            "$ref": "#/components/schemas/ProgramDetailsAndReviews"
+            "$ref": "#/components/schemas/ProgramDetailsInListPagedOutput"
           }
         },
         "additionalProperties": false
       },
-      "ProgramDetailsAndReviewsSwaggerOutputSwaggerOutput": {
+      "ProgramDetailsInListPagedOutputSwaggerOutputSwaggerOutput": {
         "type": "object",
         "properties": {
           "statusCode": {
@@ -34474,7 +35529,7 @@
             "type": "boolean"
           },
           "result": {
-            "$ref": "#/components/schemas/ProgramDetailsAndReviewsSwaggerOutput"
+            "$ref": "#/components/schemas/ProgramDetailsInListPagedOutputSwaggerOutput"
           }
         },
         "additionalProperties": false
@@ -36022,6 +37077,67 @@
             "items": {
               "$ref": "#/components/schemas/RankServiceVM"
             },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReviewVM": {
+        "type": "object",
+        "properties": {
+          "reviewId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "courseId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "programId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "moduleId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "instructorRate": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "reviewContent": {
+            "type": "string",
+            "nullable": true
+          },
+          "rate": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "studentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "moduleName": {
+            "type": "string",
+            "nullable": true
+          },
+          "studentName": {
+            "type": "string",
+            "nullable": true
+          },
+          "studentImage": {
+            "type": "string",
+            "nullable": true
+          },
+          "courseName": {
+            "type": "string",
+            "nullable": true
+          },
+          "programTitle": {
+            "type": "string",
             "nullable": true
           }
         },
