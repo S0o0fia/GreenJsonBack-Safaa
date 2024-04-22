@@ -38806,6 +38806,10 @@
             "type": "string",
             "format": "uuid"
           },
+          "studentId": {
+            "type": "string",
+            "format": "uuid"
+          },
           "studentName": {
             "type": "string",
             "nullable": true
