@@ -23725,6 +23725,15 @@
             }
           },
           {
+            "name": "StudentId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "nullable": true
+            }
+          },
+          {
             "name": "language",
             "in": "header",
             "description": "ar for Arabic or en for English",
@@ -30929,6 +30938,11 @@
           },
           "isTop": {
             "type": "boolean"
+          },
+          "courseDays": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -34949,7 +34963,8 @@
           62,
           63,
           64,
-          65
+          65,
+          66
         ],
         "type": "integer",
         "format": "int32"
