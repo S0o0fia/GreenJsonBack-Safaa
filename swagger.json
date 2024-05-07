@@ -36389,7 +36389,10 @@
       "QuestionType": {
         "enum": [
           1,
-          2
+          2,
+          3,
+          4,
+          5
         ],
         "type": "integer",
         "format": "int32"
@@ -37120,6 +37123,30 @@
         },
         "additionalProperties": false
       },
+      "AnswerMatchesVM": {
+        "type": "object",
+        "properties": {
+          "answer": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "QuestionMatchesOrFillBlankVM": {
+        "type": "object",
+        "properties": {
+          "question": {
+            "type": "string",
+            "nullable": true
+          },
+          "answer": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "AddQuizQuestionViewModel": {
         "type": "object",
         "properties": {
@@ -37160,6 +37187,27 @@
           },
           "addToQuestionBank": {
             "type": "boolean",
+            "nullable": true
+          },
+          "answerMatches": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AnswerMatchesVM"
+            },
+            "nullable": true
+          },
+          "questionMatches": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuestionMatchesOrFillBlankVM"
+            },
+            "nullable": true
+          },
+          "fillBlank": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuestionMatchesOrFillBlankVM"
+            },
             "nullable": true
           }
         },
