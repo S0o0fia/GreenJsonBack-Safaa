@@ -36639,6 +36639,9 @@
             "format": "uuid",
             "nullable": true
           },
+          "answerImage": {
+            "$ref": "#/components/schemas/PuzzleFileInfo"
+          },
           "answerText": {
             "type": "string",
             "nullable": true
