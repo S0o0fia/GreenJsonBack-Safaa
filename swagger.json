@@ -36834,6 +36834,10 @@
             "format": "uuid",
             "nullable": true
           },
+          "answer": {
+            "type": "string",
+            "nullable": true
+          },
           "isLast": {
             "type": "boolean"
           }
@@ -36968,6 +36972,32 @@
         },
         "additionalProperties": false
       },
+      "FillBlankMatchVM": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "parentQuestionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "questionText": {
+            "type": "string",
+            "nullable": true
+          },
+          "answerText": {
+            "type": "string",
+            "nullable": true
+          },
+          "index": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "QuizQuestionViewModel": {
         "type": "object",
         "properties": {
@@ -36999,6 +37029,13 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/QuestionAnswerVM"
+            },
+            "nullable": true
+          },
+          "fillBlankMatchQuestions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FillBlankMatchVM"
             },
             "nullable": true
           }
