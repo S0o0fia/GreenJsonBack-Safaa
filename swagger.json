@@ -3589,6 +3589,42 @@
         }
       }
     },
+    "/api/BigBlueButton/UpdateMeetingLink": {
+      "post": {
+        "tags": [
+          "BigBlueButton"
+        ],
+        "parameters": [
+          {
+            "name": "meetingID",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/CertificationTemplate": {
       "get": {
         "tags": [
@@ -6500,6 +6536,104 @@
         }
       }
     },
+    "/api/Course/GetCoursesLevel": {
+      "get": {
+        "tags": [
+          "Course"
+        ],
+        "parameters": [
+          {
+            "name": "SubCategoryId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseLevelOutputListSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseLevelOutputListSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseLevelOutputListSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Course/CoursesStructuredDropDown": {
+      "get": {
+        "tags": [
+          "Course"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CoursesDropDownByTypeViewModelListSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CoursesDropDownByTypeViewModelListSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CoursesDropDownByTypeViewModelListSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/CourseCategory/{id}": {
       "get": {
         "tags": [
@@ -7014,6 +7148,51 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/FilterObjectViewListSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/CourseCategory/GetWebsiteFiltered": {
+      "get": {
+        "tags": [
+          "CourseCategory"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseCategoryViewModelPagedOutputSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseCategoryViewModelPagedOutputSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseCategoryViewModelPagedOutputSwaggerOutput"
                 }
               }
             }
@@ -14746,6 +14925,14 @@
             }
           },
           {
+            "name": "ProgramName",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
             "name": "CourseId",
             "in": "query",
             "schema": {
@@ -16119,59 +16306,6 @@
         "parameters": [
           {
             "name": "Id",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          {
-            "name": "language",
-            "in": "header",
-            "description": "ar for Arabic or en for English",
-            "required": true,
-            "schema": {
-              "enum": [
-                "en",
-                "ar"
-              ],
-              "type": "string",
-              "default": "en"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/StringSwaggerOutput"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/StringSwaggerOutput"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/StringSwaggerOutput"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/ProgramLecture/StartScheduleFirstLecture": {
-      "post": {
-        "tags": [
-          "ProgramLecture"
-        ],
-        "parameters": [
-          {
-            "name": "ScheduleId",
             "in": "query",
             "schema": {
               "type": "string",
@@ -25096,6 +25230,51 @@
         }
       }
     },
+    "/api/SystemPages/MySystemPages": {
+      "get": {
+        "tags": [
+          "SystemPages"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemPageLoginInfoViewModelListSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemPageLoginInfoViewModelListSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemPageLoginInfoViewModelListSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/SystemPages/{id}": {
       "get": {
         "tags": [
@@ -30110,6 +30289,9 @@
         "additionalProperties": false
       },
       "CompetenciesInputVM": {
+        "required": [
+          "competenciesName"
+        ],
         "type": "object",
         "properties": {
           "competenciesId": {
@@ -30118,8 +30300,7 @@
             "nullable": true
           },
           "competenciesName": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "competenciesNameEn": {
             "type": "string",
@@ -30295,6 +30476,10 @@
         "additionalProperties": false
       },
       "OrganizationVM": {
+        "required": [
+          "organizationName",
+          "organizationReference"
+        ],
         "type": "object",
         "properties": {
           "organizationId": {
@@ -30303,12 +30488,10 @@
             "nullable": true
           },
           "organizationName": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "organizationReference": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "description": {
             "type": "string",
@@ -31297,6 +31480,94 @@
         },
         "additionalProperties": false
       },
+      "CourseLevelOutput": {
+        "type": "object",
+        "properties": {
+          "courseId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "levelNo": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "level": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CourseLevelOutputListSwaggerOutput": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CourseLevelOutput"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CoursesDropDownByTypeViewModel": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "courses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CourseDDViewModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CoursesDropDownByTypeViewModelListSwaggerOutput": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CoursesDropDownByTypeViewModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "CourseCategoryDetailViewModel": {
         "type": "object",
         "properties": {
@@ -31747,6 +32018,10 @@
             "nullable": true
           },
           "discussionFile": {
+            "type": "string",
+            "nullable": true
+          },
+          "fileExtension": {
             "type": "string",
             "nullable": true
           },
@@ -34128,6 +34403,9 @@
           "status": {
             "type": "string",
             "nullable": true
+          },
+          "isSeen": {
+            "type": "boolean"
           },
           "degree": {
             "type": "number",
@@ -36652,6 +36930,36 @@
         },
         "additionalProperties": false
       },
+      "FillBlankMatchVM": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "parentQuestionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "questionText": {
+            "type": "string",
+            "nullable": true
+          },
+          "answerText": {
+            "type": "string",
+            "nullable": true
+          },
+          "index": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "studentAnswer": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "QuizStudentQuestionVM": {
         "type": "object",
         "properties": {
@@ -36683,16 +36991,33 @@
             "$ref": "#/components/schemas/QuestionType"
           },
           "isCorrect": {
-            "type": "boolean"
+            "type": "number",
+            "format": "double"
+          },
+          "totalQuestionCount": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           },
           "answerId": {
-            "type": "string",
-            "format": "uuid"
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "nullable": true
           },
           "answers": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/QuestionAnswerVM"
+            },
+            "nullable": true
+          },
+          "fillBlankMatchQuestions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FillBlankMatchVM"
             },
             "nullable": true
           }
@@ -36833,8 +37158,11 @@
             "format": "uuid"
           },
           "answerId": {
-            "type": "string",
-            "format": "uuid",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
             "nullable": true
           },
           "answer": {
@@ -36971,32 +37299,6 @@
           "quizId": {
             "type": "string",
             "format": "uuid"
-          }
-        },
-        "additionalProperties": false
-      },
-      "FillBlankMatchVM": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "parentQuestionId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "questionText": {
-            "type": "string",
-            "nullable": true
-          },
-          "answerText": {
-            "type": "string",
-            "nullable": true
-          },
-          "index": {
-            "type": "integer",
-            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -41300,6 +41602,55 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SystemPageInfoViewModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SystemPageLoginInfoViewModel": {
+        "type": "object",
+        "properties": {
+          "pageName": {
+            "type": "string",
+            "nullable": true
+          },
+          "icon": {
+            "type": "string",
+            "nullable": true
+          },
+          "pageURL": {
+            "type": "string",
+            "nullable": true
+          },
+          "subPages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SystemPageLoginInfoViewModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SystemPageLoginInfoViewModelListSwaggerOutput": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SystemPageLoginInfoViewModel"
             },
             "nullable": true
           }
