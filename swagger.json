@@ -7055,6 +7055,51 @@
         }
       }
     },
+    "/api/CourseCategory/GetSubCategoryCourse": {
+      "get": {
+        "tags": [
+          "CourseCategory"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseSubCategoryViewModelListSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseSubCategoryViewModelListSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseSubCategoryViewModelListSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/CourseCategory/GetAllMainCategory": {
       "get": {
         "tags": [
@@ -11546,6 +11591,118 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/EmployeeEvaluationValuationVMSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/InductionAgreement": {
+      "post": {
+        "tags": [
+          "InductionAgreement"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InductionAgreementInputViewModel"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InductionAgreementInputViewModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InductionAgreementInputViewModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InductionAgreementInputViewModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "InductionAgreement"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringSwaggerOutput"
                 }
               }
             }
@@ -20986,6 +21143,51 @@
         }
       }
     },
+    "/api/StudentAdmin/GetStudentForCourse": {
+      "get": {
+        "tags": [
+          "StudentAdmin"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetStudentForCourseListSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetStudentForCourseListSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetStudentForCourseListSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/StudentAdmin/{StudentId}/{active}": {
       "put": {
         "tags": [
@@ -25009,30 +25211,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/PuzzleFileInfo"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PuzzleFileInfo"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PuzzleFileInfo"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/PuzzleFileInfo"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Success",
@@ -31953,6 +32131,69 @@
         },
         "additionalProperties": false
       },
+      "CourseUnderSCViewModel": {
+        "type": "object",
+        "properties": {
+          "courseId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CourseSubCategoryViewModel": {
+        "type": "object",
+        "properties": {
+          "subCourseCategoryId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "courseCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "courses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CourseUnderSCViewModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CourseSubCategoryViewModelListSwaggerOutput": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CourseSubCategoryViewModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "MainCategoryListModel": {
         "type": "object",
         "properties": {
@@ -33793,6 +34034,18 @@
           },
           "result": {
             "$ref": "#/components/schemas/EmployeeEvaluationValuationVM"
+          }
+        },
+        "additionalProperties": false
+      },
+      "InductionAgreementInputViewModel": {
+        "required": [
+          "file"
+        ],
+        "type": "object",
+        "properties": {
+          "file": {
+            "$ref": "#/components/schemas/PuzzleFileInfo"
           }
         },
         "additionalProperties": false
@@ -38341,6 +38594,9 @@
               "format": "uuid"
             },
             "nullable": true
+          },
+          "isSystem": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -38878,6 +39134,44 @@
         },
         "additionalProperties": false
       },
+      "GetStudentForCourse": {
+        "type": "object",
+        "properties": {
+          "studentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "studentName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetStudentForCourseListSwaggerOutput": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetStudentForCourse"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "StudentAcceptLetterOutputViewModel": {
         "type": "object",
         "properties": {
@@ -38890,8 +39184,12 @@
             "format": "double"
           },
           "courseId": {
-            "type": "string",
-            "format": "uuid"
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "nullable": true
           },
           "totaltuitionfees": {
             "type": "number",
@@ -38973,8 +39271,12 @@
             "format": "double"
           },
           "courseId": {
-            "type": "string",
-            "format": "uuid"
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "nullable": true
           },
           "totaltuitionfees": {
             "type": "number",
@@ -39449,6 +39751,18 @@
             "items": {
               "$ref": "#/components/schemas/SelfCourseForStudent"
             },
+            "nullable": true
+          },
+          "inductionAgreement": {
+            "type": "string",
+            "nullable": true
+          },
+          "registrationLetter": {
+            "type": "string",
+            "nullable": true
+          },
+          "acceptanceLetter": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -40799,6 +41113,9 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          },
+          "locked": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -40928,6 +41245,23 @@
         },
         "additionalProperties": false
       },
+      "StudentProgramScheduleViewModelPagedOutput": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StudentProgramScheduleViewModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "StudentCourseDetailViewModel": {
         "type": "object",
         "properties": {
@@ -40948,11 +41282,7 @@
             "nullable": true
           },
           "modules": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StudentProgramScheduleViewModel"
-            },
-            "nullable": true
+            "$ref": "#/components/schemas/StudentProgramScheduleViewModelPagedOutput"
           },
           "prograss": {
             "type": "number",
