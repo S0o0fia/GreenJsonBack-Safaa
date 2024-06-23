@@ -8661,17 +8661,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/EmailTemplateListOutputViewModelSwaggerOutput"
+                  "$ref": "#/components/schemas/EmailTemplateListOutputViewModelPagedOutputSwaggerOutput"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EmailTemplateListOutputViewModelSwaggerOutput"
+                  "$ref": "#/components/schemas/EmailTemplateListOutputViewModelPagedOutputSwaggerOutput"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EmailTemplateListOutputViewModelSwaggerOutput"
+                  "$ref": "#/components/schemas/EmailTemplateListOutputViewModelPagedOutputSwaggerOutput"
                 }
               }
             }
@@ -32813,7 +32813,24 @@
         },
         "additionalProperties": false
       },
-      "EmailTemplateListOutputViewModelSwaggerOutput": {
+      "EmailTemplateListOutputViewModelPagedOutput": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EmailTemplateListOutputViewModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EmailTemplateListOutputViewModelPagedOutputSwaggerOutput": {
         "type": "object",
         "properties": {
           "statusCode": {
@@ -32828,7 +32845,7 @@
             "type": "boolean"
           },
           "result": {
-            "$ref": "#/components/schemas/EmailTemplateListOutputViewModel"
+            "$ref": "#/components/schemas/EmailTemplateListOutputViewModelPagedOutput"
           }
         },
         "additionalProperties": false
