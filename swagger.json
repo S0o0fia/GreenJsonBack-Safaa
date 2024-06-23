@@ -22675,6 +22675,80 @@
         }
       }
     },
+    "/api/StudentAdmin/DeleteStudent/{studentId}": {
+      "delete": {
+        "tags": [
+          "StudentAdmin"
+        ],
+        "parameters": [
+          {
+            "name": "studentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/StudentCourses/UpdateStatus": {
       "post": {
         "tags": [
@@ -31024,6 +31098,16 @@
           },
           "organization": {
             "$ref": "#/components/schemas/OrganizationVM"
+          },
+          "courseDays": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "organizationId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -35746,7 +35830,8 @@
           63,
           64,
           65,
-          66
+          66,
+          67
         ],
         "type": "integer",
         "format": "int32"
@@ -39110,6 +39195,11 @@
           "acceptanceLetter": {
             "type": "string",
             "nullable": true
+          },
+          "quizStudentId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -39781,6 +39871,11 @@
           "acceptanceLetter": {
             "type": "string",
             "nullable": true
+          },
+          "quizStudentId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -40185,6 +40280,33 @@
           }
         },
         "additionalProperties": false
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
       },
       "StudentCoursesStatusViewInputModel": {
         "type": "object",
@@ -41132,6 +41254,12 @@
             "nullable": true
           },
           "locked": {
+            "type": "boolean"
+          },
+          "notCompleteRegistration": {
+            "type": "boolean"
+          },
+          "notSolvedEnglishTest": {
             "type": "boolean"
           }
         },
