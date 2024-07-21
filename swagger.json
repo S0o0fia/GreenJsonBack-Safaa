@@ -13362,6 +13362,7 @@
         "tags": [
           "Modules"
         ],
+        "operationId": "Get",
         "parameters": [
           {
             "name": "id",
@@ -17464,6 +17465,15 @@
           },
           {
             "name": "ProgramScheduleId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "nullable": true
+            }
+          },
+          {
+            "name": "ProgramLectureId",
             "in": "query",
             "schema": {
               "type": "string",
@@ -27510,6 +27520,96 @@
           }
         }
       }
+    },
+    "/api/Video/GetVideoStatus": {
+      "get": {
+        "tags": [
+          "Video"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnumModelListSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnumModelListSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnumModelListSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Video/GetVideoType": {
+      "get": {
+        "tags": [
+          "Video"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/VideoTypeSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VideoTypeSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VideoTypeSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -34447,6 +34547,9 @@
             "type": "string",
             "nullable": true
           },
+          "isStart": {
+            "type": "boolean"
+          },
           "done": {
             "type": "boolean"
           },
@@ -34543,6 +34646,40 @@
           },
           "videoURL": {
             "type": "string",
+            "nullable": true
+          },
+          "videoName": {
+            "type": "string",
+            "nullable": true
+          },
+          "videoerrorCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "videofailedReason": {
+            "type": "string",
+            "nullable": true
+          },
+          "videotimestamp": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "videoUpload": {
+            "type": "boolean"
+          },
+          "videoStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "videoStatusNumber": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "videoprogress": {
+            "type": "integer",
+            "format": "int32",
             "nullable": true
           },
           "meetingURL": {
@@ -35123,18 +35260,6 @@
         },
         "additionalProperties": false
       },
-      "VideoStatus": {
-        "enum": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5
-        ],
-        "type": "integer",
-        "format": "int32"
-      },
       "StudentLessonNoteListViewModel": {
         "type": "object",
         "properties": {
@@ -35161,34 +35286,52 @@
             "type": "string",
             "nullable": true
           },
-          "videoErrorCode": {
+          "videoName": {
             "type": "string",
             "nullable": true
           },
-          "videoFailedReason": {
+          "videoerrorCode": {
             "type": "string",
             "nullable": true
           },
-          "videoTimestamp": {
+          "videofailedReason": {
+            "type": "string",
+            "nullable": true
+          },
+          "videotimestamp": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "videoPercentage": {
+          "videoprogress": {
             "type": "integer",
             "format": "int32",
             "nullable": true
-          },
-          "videoStatus": {
-            "$ref": "#/components/schemas/VideoStatus"
           },
           "lessonIndex": {
             "type": "integer",
             "format": "int32"
           },
+          "videoUpload": {
+            "type": "boolean"
+          },
+          "videoStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "videoStatusNumber": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "moduleId": {
             "type": "string",
             "format": "uuid"
+          },
+          "videoPercentage": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           },
           "isActive": {
             "type": "boolean"
@@ -35273,6 +35416,10 @@
             "nullable": true
           },
           "videoURL": {
+            "type": "string",
+            "nullable": true
+          },
+          "videoName": {
             "type": "string",
             "nullable": true
           },
@@ -36646,6 +36793,9 @@
             "type": "string",
             "nullable": true
           },
+          "isStart": {
+            "type": "boolean"
+          },
           "description": {
             "type": "string",
             "nullable": true
@@ -36677,6 +36827,10 @@
           "programScheduleId": {
             "type": "string",
             "format": "uuid"
+          },
+          "videoName": {
+            "type": "string",
+            "nullable": true
           },
           "lessonIds": {
             "type": "array",
@@ -36768,6 +36922,9 @@
           "recordingURL": {
             "type": "string",
             "nullable": true
+          },
+          "isStart": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -37202,6 +37359,10 @@
             "type": "string",
             "nullable": true
           },
+          "programLectureName": {
+            "type": "string",
+            "nullable": true
+          },
           "questionImage": {
             "type": "string",
             "nullable": true
@@ -37210,7 +37371,27 @@
             "type": "string",
             "nullable": true
           },
+          "courseID": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
           "moduleId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "programId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "programScheduleId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "programLectureId": {
             "type": "string",
             "format": "uuid",
             "nullable": true
@@ -37267,8 +37448,35 @@
             "type": "string",
             "nullable": true
           },
+          "answerImage": {
+            "$ref": "#/components/schemas/PuzzleFileInfo"
+          },
           "isCorrect": {
             "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AnswerMatchesVM": {
+        "type": "object",
+        "properties": {
+          "answer": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "QuestionMatchesOrFillBlankVM": {
+        "type": "object",
+        "properties": {
+          "question": {
+            "type": "string",
+            "nullable": true
+          },
+          "answer": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -37297,6 +37505,21 @@
           "type": {
             "$ref": "#/components/schemas/QuestionType"
           },
+          "programId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "programScheduleId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "programLectureId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
           "newQuestionImage": {
             "$ref": "#/components/schemas/PuzzleFileInfo"
           },
@@ -37304,6 +37527,27 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/QuestionBankAnswerViewModel"
+            },
+            "nullable": true
+          },
+          "answerMatches": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AnswerMatchesVM"
+            },
+            "nullable": true
+          },
+          "questionMatches": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuestionMatchesOrFillBlankVM"
+            },
+            "nullable": true
+          },
+          "fillBlank": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuestionMatchesOrFillBlankVM"
             },
             "nullable": true
           }
@@ -37330,6 +37574,21 @@
             "nullable": true
           },
           "moduleId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "programId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "programScheduleId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "programLectureId": {
             "type": "string",
             "format": "uuid",
             "nullable": true
@@ -38046,30 +38305,6 @@
           },
           "result": {
             "$ref": "#/components/schemas/QuizViewModel"
-          }
-        },
-        "additionalProperties": false
-      },
-      "AnswerMatchesVM": {
-        "type": "object",
-        "properties": {
-          "answer": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "QuestionMatchesOrFillBlankVM": {
-        "type": "object",
-        "properties": {
-          "question": {
-            "type": "string",
-            "nullable": true
-          },
-          "answer": {
-            "type": "string",
-            "nullable": true
           }
         },
         "additionalProperties": false
@@ -41187,6 +41422,10 @@
       "StudentCourseListViewModel": {
         "type": "object",
         "properties": {
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
           "courseId": {
             "type": "string",
             "format": "uuid"
@@ -42909,6 +43148,18 @@
         },
         "additionalProperties": false
       },
+      "VideoStatus": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
       "WebHookData": {
         "type": "object",
         "properties": {
@@ -42940,6 +43191,43 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VideoType": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "nullable": true
+          },
+          "uploadVideo": {
+            "type": "boolean"
+          },
+          "videoId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VideoTypeSwaggerOutput": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "$ref": "#/components/schemas/VideoType"
           }
         },
         "additionalProperties": false
