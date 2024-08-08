@@ -6723,6 +6723,148 @@
         }
       }
     },
+    "/api/Course/GetSelfStudyCoursesReport": {
+      "get": {
+        "tags": [
+          "Course"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "MainCategoryId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "nullable": true
+            }
+          },
+          {
+            "name": "SubCategoryId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "nullable": true
+            }
+          },
+          {
+            "name": "Level",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/CourseLevel"
+            }
+          },
+          {
+            "name": "Name",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "Language",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "PriceFrom",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "double",
+              "nullable": true
+            }
+          },
+          {
+            "name": "PriceTo",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "double",
+              "nullable": true
+            }
+          },
+          {
+            "name": "IsFree",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "CreationDateFrom",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "CreationDateTo",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "Type",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/CourseType"
+            }
+          },
+          {
+            "name": "Key",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "IsAscending",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/CourseCategory/{id}": {
       "get": {
         "tags": [
@@ -13050,24 +13192,64 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/StudentLessonNoteListViewModelInputViewModel"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/StudentLessonNoteListViewModelInputViewModel"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/StudentLessonNoteListViewModelInputViewModel"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/StudentLessonNoteListViewModelInputViewModel"
+                "type": "object",
+                "properties": {
+                  "LessonId": {
+                    "type": "string",
+                    "format": "uuid",
+                    "nullable": true
+                  },
+                  "Title": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "Description": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "VideoUploadFile": {
+                    "type": "string",
+                    "format": "binary",
+                    "nullable": true
+                  },
+                  "Files": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "VideoURL": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "ModuleId": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              },
+              "encoding": {
+                "LessonId": {
+                  "style": "form"
+                },
+                "Title": {
+                  "style": "form"
+                },
+                "Description": {
+                  "style": "form"
+                },
+                "VideoUploadFile": {
+                  "style": "form"
+                },
+                "Files": {
+                  "style": "form"
+                },
+                "VideoURL": {
+                  "style": "form"
+                },
+                "ModuleId": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -13117,24 +13299,64 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/StudentLessonNoteListViewModelInputViewModel"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/StudentLessonNoteListViewModelInputViewModel"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/StudentLessonNoteListViewModelInputViewModel"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/StudentLessonNoteListViewModelInputViewModel"
+                "type": "object",
+                "properties": {
+                  "LessonId": {
+                    "type": "string",
+                    "format": "uuid",
+                    "nullable": true
+                  },
+                  "Title": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "Description": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "VideoUploadFile": {
+                    "type": "string",
+                    "format": "binary",
+                    "nullable": true
+                  },
+                  "Files": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "VideoURL": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "ModuleId": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              },
+              "encoding": {
+                "LessonId": {
+                  "style": "form"
+                },
+                "Title": {
+                  "style": "form"
+                },
+                "Description": {
+                  "style": "form"
+                },
+                "VideoUploadFile": {
+                  "style": "form"
+                },
+                "Files": {
+                  "style": "form"
+                },
+                "VideoURL": {
+                  "style": "form"
+                },
+                "ModuleId": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -13358,58 +13580,6 @@
       }
     },
     "/api/Modules": {
-      "get": {
-        "tags": [
-          "Modules"
-        ],
-        "operationId": "Get",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          {
-            "name": "language",
-            "in": "header",
-            "description": "ar for Arabic or en for English",
-            "required": true,
-            "schema": {
-              "enum": [
-                "en",
-                "ar"
-              ],
-              "type": "string",
-              "default": "en"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ModuleDetailsViewModelSwaggerOutput"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ModuleDetailsViewModelSwaggerOutput"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ModuleDetailsViewModelSwaggerOutput"
-                }
-              }
-            }
-          }
-        }
-      },
       "post": {
         "tags": [
           "Modules"
@@ -13538,6 +13708,57 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Modules"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModuleDetailsViewModelSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModuleDetailsViewModelSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModuleDetailsViewModelSwaggerOutput"
                 }
               }
             }
@@ -13708,22 +13929,6 @@
             "schema": {
               "type": "string",
               "nullable": true
-            }
-          },
-          {
-            "name": "PageNumber",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "PageSize",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
             }
           },
           {
@@ -27610,6 +27815,72 @@
           }
         }
       }
+    },
+    "/api/Video/UploadFile": {
+      "post": {
+        "tags": [
+          "Video"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "nullable": true
+                  }
+                }
+              },
+              "encoding": {
+                "file": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -32170,6 +32441,10 @@
             "type": "string",
             "nullable": true
           },
+          "isDual": {
+            "type": "boolean",
+            "nullable": true
+          },
           "code": {
             "type": "string",
             "nullable": true
@@ -32227,6 +32502,10 @@
           },
           "isTop": {
             "type": "boolean"
+          },
+          "isDual": {
+            "type": "boolean",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -35392,38 +35671,36 @@
         },
         "additionalProperties": false
       },
-      "StudentLessonNoteListViewModelInputViewModel": {
+      "AddEditModuleViewModel": {
+        "required": [
+          "title"
+        ],
         "type": "object",
         "properties": {
-          "lessonId": {
+          "id": {
             "type": "string",
             "format": "uuid",
             "nullable": true
           },
           "title": {
+            "type": "string"
+          },
+          "code": {
             "type": "string",
+            "nullable": true
+          },
+          "topics": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
             "nullable": true
           },
           "description": {
             "type": "string",
             "nullable": true
           },
-          "files": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/LessonFiles"
-            },
-            "nullable": true
-          },
-          "videoURL": {
-            "type": "string",
-            "nullable": true
-          },
-          "videoName": {
-            "type": "string",
-            "nullable": true
-          },
-          "moduleId": {
+          "courseId": {
             "type": "string",
             "format": "uuid"
           }
@@ -35535,42 +35812,6 @@
           },
           "result": {
             "$ref": "#/components/schemas/ModuleDetailsViewModel"
-          }
-        },
-        "additionalProperties": false
-      },
-      "AddEditModuleViewModel": {
-        "required": [
-          "title"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "title": {
-            "type": "string"
-          },
-          "code": {
-            "type": "string",
-            "nullable": true
-          },
-          "topics": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "courseId": {
-            "type": "string",
-            "format": "uuid"
           }
         },
         "additionalProperties": false
@@ -35978,7 +36219,8 @@
           64,
           65,
           66,
-          67
+          67,
+          68
         ],
         "type": "integer",
         "format": "int32"
@@ -42348,8 +42590,8 @@
             "nullable": true
           },
           "rate": {
-            "type": "integer",
-            "format": "int32",
+            "type": "number",
+            "format": "double",
             "nullable": true
           },
           "certificationURL": {
