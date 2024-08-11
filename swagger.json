@@ -35614,6 +35614,9 @@
           },
           "isActive": {
             "type": "boolean"
+          },
+          "isStart": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -38410,6 +38413,10 @@
           },
           "questionImage": {
             "type": "string",
+            "nullable": true
+          },
+          "addedToBank": {
+            "type": "boolean",
             "nullable": true
           },
           "type": {
