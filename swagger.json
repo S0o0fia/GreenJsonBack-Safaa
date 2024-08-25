@@ -6865,6 +6865,62 @@
         }
       }
     },
+    "/api/Course/GeneratePdf": {
+      "get": {
+        "tags": [
+          "Course"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Course/downloadPdf": {
+      "get": {
+        "tags": [
+          "Course"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/CourseCategory/{id}": {
       "get": {
         "tags": [
@@ -37585,6 +37641,36 @@
         },
         "additionalProperties": false
       },
+      "FillBlankMatchBank": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "parentQuestionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "questionText": {
+            "type": "string",
+            "nullable": true
+          },
+          "answerText": {
+            "type": "string",
+            "nullable": true
+          },
+          "index": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "studentAnswer": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "QuestionBankDetailViewModel": {
         "type": "object",
         "properties": {
@@ -37649,6 +37735,13 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/QuestionBankAnswerDetailViewModel"
+            },
+            "nullable": true
+          },
+          "fillBlankMatchAnswers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FillBlankMatchBank"
             },
             "nullable": true
           }
