@@ -8265,6 +8265,59 @@
         }
       }
     },
+    "/api/Discussion/FinalDelete": {
+      "post": {
+        "tags": [
+          "Discussion"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Discussion/Undo": {
       "post": {
         "tags": [
@@ -16148,24 +16201,110 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/LectureInputViewModel"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LectureInputViewModel"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LectureInputViewModel"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/LectureInputViewModel"
+                "type": "object",
+                "properties": {
+                  "ProgramLectureId": {
+                    "type": "string",
+                    "format": "uuid",
+                    "nullable": true
+                  },
+                  "Title": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "IsStart": {
+                    "type": "boolean"
+                  },
+                  "Description": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "VideoUploadFile": {
+                    "type": "string",
+                    "format": "binary",
+                    "nullable": true
+                  },
+                  "Files": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "VideoURL": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "MeetingURL": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "RecordingURL": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "Date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "ProgramScheduleId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "VideoName": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "LessonIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "nullable": true
+                  }
+                }
+              },
+              "encoding": {
+                "ProgramLectureId": {
+                  "style": "form"
+                },
+                "Title": {
+                  "style": "form"
+                },
+                "IsStart": {
+                  "style": "form"
+                },
+                "Description": {
+                  "style": "form"
+                },
+                "VideoUploadFile": {
+                  "style": "form"
+                },
+                "Files": {
+                  "style": "form"
+                },
+                "VideoURL": {
+                  "style": "form"
+                },
+                "MeetingURL": {
+                  "style": "form"
+                },
+                "RecordingURL": {
+                  "style": "form"
+                },
+                "Date": {
+                  "style": "form"
+                },
+                "ProgramScheduleId": {
+                  "style": "form"
+                },
+                "VideoName": {
+                  "style": "form"
+                },
+                "LessonIds": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -16215,24 +16354,110 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/LectureInputViewModel"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LectureInputViewModel"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LectureInputViewModel"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/LectureInputViewModel"
+                "type": "object",
+                "properties": {
+                  "ProgramLectureId": {
+                    "type": "string",
+                    "format": "uuid",
+                    "nullable": true
+                  },
+                  "Title": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "IsStart": {
+                    "type": "boolean"
+                  },
+                  "Description": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "VideoUploadFile": {
+                    "type": "string",
+                    "format": "binary",
+                    "nullable": true
+                  },
+                  "Files": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "VideoURL": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "MeetingURL": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "RecordingURL": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "Date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "ProgramScheduleId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "VideoName": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "LessonIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "nullable": true
+                  }
+                }
+              },
+              "encoding": {
+                "ProgramLectureId": {
+                  "style": "form"
+                },
+                "Title": {
+                  "style": "form"
+                },
+                "IsStart": {
+                  "style": "form"
+                },
+                "Description": {
+                  "style": "form"
+                },
+                "VideoUploadFile": {
+                  "style": "form"
+                },
+                "Files": {
+                  "style": "form"
+                },
+                "VideoURL": {
+                  "style": "form"
+                },
+                "MeetingURL": {
+                  "style": "form"
+                },
+                "RecordingURL": {
+                  "style": "form"
+                },
+                "Date": {
+                  "style": "form"
+                },
+                "ProgramScheduleId": {
+                  "style": "form"
+                },
+                "VideoName": {
+                  "style": "form"
+                },
+                "LessonIds": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -16439,24 +16664,76 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/LectureInstructorInputViewModel"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LectureInstructorInputViewModel"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LectureInstructorInputViewModel"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/LectureInstructorInputViewModel"
+                "type": "object",
+                "properties": {
+                  "ProgramLectureId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "Title": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "VideoUploadFile": {
+                    "type": "string",
+                    "format": "binary",
+                    "nullable": true
+                  },
+                  "Description": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "Files": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "VideoURL": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "MeetingURL": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "RecordingURL": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "IsStart": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "encoding": {
+                "ProgramLectureId": {
+                  "style": "form"
+                },
+                "Title": {
+                  "style": "form"
+                },
+                "VideoUploadFile": {
+                  "style": "form"
+                },
+                "Description": {
+                  "style": "form"
+                },
+                "Files": {
+                  "style": "form"
+                },
+                "VideoURL": {
+                  "style": "form"
+                },
+                "MeetingURL": {
+                  "style": "form"
+                },
+                "RecordingURL": {
+                  "style": "form"
+                },
+                "IsStart": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -37082,68 +37359,6 @@
         },
         "additionalProperties": false
       },
-      "LectureInputViewModel": {
-        "type": "object",
-        "properties": {
-          "programLectureId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "title": {
-            "type": "string",
-            "nullable": true
-          },
-          "isStart": {
-            "type": "boolean"
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "files": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/LessonFiles"
-            },
-            "nullable": true
-          },
-          "videoURL": {
-            "type": "string",
-            "nullable": true
-          },
-          "meetingURL": {
-            "type": "string",
-            "nullable": true
-          },
-          "recordingURL": {
-            "type": "string",
-            "nullable": true
-          },
-          "date": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "programScheduleId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "videoName": {
-            "type": "string",
-            "nullable": true
-          },
-          "lessonIds": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "format": "uuid"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "LectureViewModel": {
         "type": "object",
         "properties": {
@@ -37186,46 +37401,6 @@
               "$ref": "#/components/schemas/LectureViewModel"
             },
             "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "LectureInstructorInputViewModel": {
-        "type": "object",
-        "properties": {
-          "programLectureId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "title": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "files": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/LessonFiles"
-            },
-            "nullable": true
-          },
-          "videoURL": {
-            "type": "string",
-            "nullable": true
-          },
-          "meetingURL": {
-            "type": "string",
-            "nullable": true
-          },
-          "recordingURL": {
-            "type": "string",
-            "nullable": true
-          },
-          "isStart": {
-            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -37774,7 +37949,8 @@
           2,
           3,
           4,
-          5
+          5,
+          6
         ],
         "type": "integer",
         "format": "int32"
