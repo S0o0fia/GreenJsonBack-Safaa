@@ -5302,24 +5302,209 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/CourseInputViewModel"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CourseInputViewModel"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CourseInputViewModel"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CourseInputViewModel"
+                "type": "object",
+                "properties": {
+                  "CourseId": {
+                    "type": "string",
+                    "format": "uuid",
+                    "nullable": true
+                  },
+                  "Name": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "Requirment": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "nullable": true
+                  },
+                  "ShortDescription": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "Objective": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "nullable": true
+                  },
+                  "Type": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "LongDescription": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "Tags": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "nullable": true
+                  },
+                  "Language": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "SubCategoryId": {
+                    "type": "string",
+                    "format": "uuid",
+                    "nullable": true
+                  },
+                  "Organization": {
+                    "type": "string",
+                    "format": "uuid",
+                    "nullable": true
+                  },
+                  "Level": {
+                    "type": "integer",
+                    "format": "int32",
+                    "nullable": true
+                  },
+                  "Ranks": {
+                    "uniqueItems": true,
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "nullable": true
+                  },
+                  "Code": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "IsFree": {
+                    "type": "boolean"
+                  },
+                  "MainPrice": {
+                    "type": "number",
+                    "format": "double",
+                    "nullable": true
+                  },
+                  "SpecialPrice": {
+                    "type": "number",
+                    "format": "double",
+                    "nullable": true
+                  },
+                  "SpecialValidTill": {
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "NewCourseImage": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "EssentialViewing": {
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "CourseVideoUrl": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "Status": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "IsTop": {
+                    "type": "boolean"
+                  },
+                  "CourseDays": {
+                    "type": "integer",
+                    "format": "int32",
+                    "nullable": true
+                  },
+                  "VideoUploadFile": {
+                    "type": "string",
+                    "format": "binary",
+                    "nullable": true
+                  }
+                }
+              },
+              "encoding": {
+                "CourseId": {
+                  "style": "form"
+                },
+                "Name": {
+                  "style": "form"
+                },
+                "Requirment": {
+                  "style": "form"
+                },
+                "ShortDescription": {
+                  "style": "form"
+                },
+                "Objective": {
+                  "style": "form"
+                },
+                "Type": {
+                  "style": "form"
+                },
+                "LongDescription": {
+                  "style": "form"
+                },
+                "Tags": {
+                  "style": "form"
+                },
+                "Language": {
+                  "style": "form"
+                },
+                "SubCategoryId": {
+                  "style": "form"
+                },
+                "Organization": {
+                  "style": "form"
+                },
+                "Level": {
+                  "style": "form"
+                },
+                "Ranks": {
+                  "style": "form"
+                },
+                "Code": {
+                  "style": "form"
+                },
+                "IsFree": {
+                  "style": "form"
+                },
+                "MainPrice": {
+                  "style": "form"
+                },
+                "SpecialPrice": {
+                  "style": "form"
+                },
+                "SpecialValidTill": {
+                  "style": "form"
+                },
+                "NewCourseImage": {
+                  "style": "form"
+                },
+                "EssentialViewing": {
+                  "style": "form"
+                },
+                "CourseVideoUrl": {
+                  "style": "form"
+                },
+                "Status": {
+                  "style": "form"
+                },
+                "IsTop": {
+                  "style": "form"
+                },
+                "CourseDays": {
+                  "style": "form"
+                },
+                "VideoUploadFile": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -5568,6 +5753,79 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CourseViewModelPagedOutputSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Course/UpdateCourseVideo": {
+      "put": {
+        "tags": [
+          "Course"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "CourseId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "VideoUploadFile": {
+                    "type": "string",
+                    "format": "binary",
+                    "nullable": true
+                  }
+                }
+              },
+              "encoding": {
+                "CourseId": {
+                  "style": "form"
+                },
+                "VideoUploadFile": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuidSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuidSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuidSwaggerOutput"
                 }
               }
             }
@@ -24908,6 +25166,51 @@
         }
       }
     },
+    "/api/Students/GetStudentProgramDD": {
+      "get": {
+        "tags": [
+          "Students"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudentCourseProgramDDListSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudentCourseProgramDDListSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudentCourseProgramDDListSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Students/GetStudentModuleDD": {
       "get": {
         "tags": [
@@ -31672,6 +31975,18 @@
         },
         "additionalProperties": false
       },
+      "VideoStatus": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
       "CourseDetailsViewModel": {
         "type": "object",
         "properties": {
@@ -31812,6 +32127,36 @@
             "type": "string",
             "format": "uuid",
             "nullable": true
+          },
+          "videoName": {
+            "type": "string",
+            "nullable": true
+          },
+          "videoerrorCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "videofailedReason": {
+            "type": "string",
+            "nullable": true
+          },
+          "videotimestamp": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "videoprogress": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "videoStatusNumber": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "videoStatus": {
+            "$ref": "#/components/schemas/VideoStatus"
           }
         },
         "additionalProperties": false
@@ -36556,7 +36901,8 @@
           65,
           66,
           67,
-          68
+          68,
+          69
         ],
         "type": "integer",
         "format": "int32"
@@ -38529,6 +38875,10 @@
           },
           "isLast": {
             "type": "boolean"
+          },
+          "timeRemaining": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -41957,6 +42307,10 @@
             "type": "string",
             "nullable": true
           },
+          "programTitle": {
+            "type": "string",
+            "nullable": true
+          },
           "startDate": {
             "type": "string",
             "format": "date-time",
@@ -42368,6 +42722,10 @@
           "endDate": {
             "type": "string",
             "format": "date-time"
+          },
+          "certificationUrl": {
+            "type": "string",
+            "nullable": true
           },
           "assignmentChart": {
             "type": "array",
@@ -43666,18 +44024,6 @@
         },
         "additionalProperties": false
       },
-      "VideoStatus": {
-        "enum": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5
-        ],
-        "type": "integer",
-        "format": "int32"
-      },
       "WebHookData": {
         "type": "object",
         "properties": {
@@ -43690,7 +44036,8 @@
             "nullable": true
           },
           "status": {
-            "$ref": "#/components/schemas/VideoStatus"
+            "type": "string",
+            "nullable": true
           },
           "errorCode": {
             "type": "string",
@@ -43706,8 +44053,8 @@
             "nullable": true
           },
           "progress": {
-            "type": "integer",
-            "format": "int32",
+            "type": "number",
+            "format": "double",
             "nullable": true
           }
         },
