@@ -20022,6 +20022,13 @@
             }
           },
           {
+            "name": "ForSameUser",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
             "name": "language",
             "in": "header",
             "description": "ar for Arabic or en for English",
@@ -20091,6 +20098,13 @@
               "type": "string",
               "format": "uuid",
               "nullable": true
+            }
+          },
+          {
+            "name": "ForSameUser",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
             }
           },
           {
@@ -37560,6 +37574,7 @@
       },
       "ProgramType": {
         "enum": [
+          0,
           1,
           2,
           3
