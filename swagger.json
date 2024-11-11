@@ -12107,6 +12107,500 @@
         }
       }
     },
+    "/api/EnglishQuiz": {
+      "get": {
+        "tags": [
+          "EnglishQuiz"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuizViewModelSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuizViewModelSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuizViewModelSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "EnglishQuiz"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddEditQuizViewModel"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddEditQuizViewModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddEditQuizViewModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddEditQuizViewModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "EnglishQuiz"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddEditQuizViewModel"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddEditQuizViewModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddEditQuizViewModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddEditQuizViewModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/EnglishQuiz/{id}": {
+      "delete": {
+        "tags": [
+          "EnglishQuiz"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/EnglishQuiz/search": {
+      "get": {
+        "tags": [
+          "EnglishQuiz"
+        ],
+        "parameters": [
+          {
+            "name": "fromDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "ToDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "SearchText",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "ModuleId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "nullable": true
+            }
+          },
+          {
+            "name": "QuizId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "nullable": true
+            }
+          },
+          {
+            "name": "ProgramId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "nullable": true
+            }
+          },
+          {
+            "name": "ProgramScheduleId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "nullable": true
+            }
+          },
+          {
+            "name": "ProgramLectureId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "nullable": true
+            }
+          },
+          {
+            "name": "ForEnglishQuiz",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "nullable": true
+            }
+          },
+          {
+            "name": "PageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "SortBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "IsSortAscending",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuizListPagedOutputSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuizListPagedOutputSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuizListPagedOutputSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/EnglishQuiz/CopyQuiz": {
+      "post": {
+        "tags": [
+          "EnglishQuiz"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationStateSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/EnglishQuiz/englishquizes": {
+      "get": {
+        "tags": [
+          "EnglishQuiz"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "description": "ar for Arabic or en for English",
+            "required": true,
+            "schema": {
+              "enum": [
+                "en",
+                "ar"
+              ],
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuizEnglishListListSwaggerOutput"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuizEnglishListListSwaggerOutput"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuizEnglishListListSwaggerOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/InductionAgreement": {
       "post": {
         "tags": [
@@ -35210,6 +35704,591 @@
         },
         "additionalProperties": false
       },
+      "QuestionAnswerVM": {
+        "type": "object",
+        "properties": {
+          "questionAnswerId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "questionId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "answerImage": {
+            "$ref": "#/components/schemas/PuzzleFileInfo"
+          },
+          "answerText": {
+            "type": "string",
+            "nullable": true
+          },
+          "isCorrect": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FillBlankMatchVM": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "parentQuestionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "questionText": {
+            "type": "string",
+            "nullable": true
+          },
+          "answerText": {
+            "type": "string",
+            "nullable": true
+          },
+          "index": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "studentAnswer": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "QuizQuestionViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "quizId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "questionText": {
+            "type": "string",
+            "nullable": true
+          },
+          "questionHtml": {
+            "type": "string",
+            "nullable": true
+          },
+          "questionImage": {
+            "type": "string",
+            "nullable": true
+          },
+          "addedToBank": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "type": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "answers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuestionAnswerVM"
+            },
+            "nullable": true
+          },
+          "fillBlankMatchQuestions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FillBlankMatchVM"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "QuizViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "quizName": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "timeLimit": {
+            "type": "number",
+            "format": "double"
+          },
+          "trialsNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "topResult": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "passingScore": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "showResultView": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "randomQuestion": {
+            "type": "boolean"
+          },
+          "deadlineDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "publishDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "masterQuizID": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "moduleId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "moduleIndex": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "programId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "programScheduleId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "programLectureId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "courseId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "editable": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "questions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuizQuestionViewModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "QuizViewModelSwaggerOutput": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "$ref": "#/components/schemas/QuizViewModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "QuestionType": {
+        "enum": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "AnswerMatchesVM": {
+        "type": "object",
+        "properties": {
+          "answer": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "QuestionMatchesOrFillBlankVM": {
+        "type": "object",
+        "properties": {
+          "question": {
+            "type": "string",
+            "nullable": true
+          },
+          "answer": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddQuizQuestionViewModel": {
+        "type": "object",
+        "properties": {
+          "questionAnswerId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "quizId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "questionText": {
+            "type": "string",
+            "nullable": true
+          },
+          "questionHtml": {
+            "type": "string",
+            "nullable": true
+          },
+          "questionImage": {
+            "type": "string",
+            "nullable": true
+          },
+          "newQuestionImage": {
+            "$ref": "#/components/schemas/PuzzleFileInfo"
+          },
+          "type": {
+            "$ref": "#/components/schemas/QuestionType"
+          },
+          "answers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuestionAnswerVM"
+            },
+            "nullable": true
+          },
+          "addToQuestionBank": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "answerMatches": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AnswerMatchesVM"
+            },
+            "nullable": true
+          },
+          "questionMatches": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuestionMatchesOrFillBlankVM"
+            },
+            "nullable": true
+          },
+          "fillBlank": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuestionMatchesOrFillBlankVM"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddEditQuizViewModel": {
+        "required": [
+          "quizName"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "quizName": {
+            "maxLength": 250,
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "moduleId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "moduleIndex": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "programId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "programScheduleId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "programLectureId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "timeLimit": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "trialsNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "topResult": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "passingScore": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "showResultView": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "randomQuestion": {
+            "type": "boolean"
+          },
+          "deadlineDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "publishDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "questions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AddQuizQuestionViewModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "QuizList": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "quizName": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "lectureName": {
+            "type": "string",
+            "nullable": true
+          },
+          "programTitle": {
+            "type": "string",
+            "nullable": true
+          },
+          "courseTitle": {
+            "type": "string",
+            "nullable": true
+          },
+          "moduleTitle": {
+            "type": "string",
+            "nullable": true
+          },
+          "timeLimit": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "trialsNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "moduleId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "moduleIndex": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "deadlineDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "publishDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "studentStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "creationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "quizQuestionNo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quizTaken": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "programId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "programScheduleId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "programLectureId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "QuizListPagedOutput": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuizList"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "QuizListPagedOutputSwaggerOutput": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "$ref": "#/components/schemas/QuizListPagedOutput"
+          }
+        },
+        "additionalProperties": false
+      },
+      "QuizEnglishList": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "QuizEnglishListListSwaggerOutput": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuizEnglishList"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "InductionAgreementInputViewModel": {
         "required": [
           "file"
@@ -35758,140 +36837,6 @@
           },
           "result": {
             "$ref": "#/components/schemas/StudentInScheduleViewModelPagedOutput"
-          }
-        },
-        "additionalProperties": false
-      },
-      "QuizList": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "quizName": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "lectureName": {
-            "type": "string",
-            "nullable": true
-          },
-          "programTitle": {
-            "type": "string",
-            "nullable": true
-          },
-          "courseTitle": {
-            "type": "string",
-            "nullable": true
-          },
-          "moduleTitle": {
-            "type": "string",
-            "nullable": true
-          },
-          "timeLimit": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "trialsNumber": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "moduleId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "moduleIndex": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "deadlineDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "publishDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "status": {
-            "type": "string",
-            "nullable": true
-          },
-          "studentStatus": {
-            "type": "string",
-            "nullable": true
-          },
-          "creationDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "quizQuestionNo": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "quizTaken": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "programId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "programScheduleId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "programLectureId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "QuizListPagedOutput": {
-        "type": "object",
-        "properties": {
-          "totalCount": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "result": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/QuizList"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "QuizListPagedOutputSwaggerOutput": {
-        "type": "object",
-        "properties": {
-          "statusCode": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "ok": {
-            "type": "boolean"
-          },
-          "result": {
-            "$ref": "#/components/schemas/QuizListPagedOutput"
           }
         },
         "additionalProperties": false
@@ -38304,18 +39249,6 @@
         },
         "additionalProperties": false
       },
-      "QuestionType": {
-        "enum": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6
-        ],
-        "type": "integer",
-        "format": "int32"
-      },
       "QuestionBankAnswerViewModel": {
         "type": "object",
         "properties": {
@@ -38328,30 +39261,6 @@
           },
           "isCorrect": {
             "type": "boolean"
-          }
-        },
-        "additionalProperties": false
-      },
-      "AnswerMatchesVM": {
-        "type": "object",
-        "properties": {
-          "answer": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "QuestionMatchesOrFillBlankVM": {
-        "type": "object",
-        "properties": {
-          "question": {
-            "type": "string",
-            "nullable": true
-          },
-          "answer": {
-            "type": "string",
-            "nullable": true
           }
         },
         "additionalProperties": false
@@ -38617,62 +39526,6 @@
             "format": "int32"
           },
           "name": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "QuestionAnswerVM": {
-        "type": "object",
-        "properties": {
-          "questionAnswerId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "questionId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "answerImage": {
-            "$ref": "#/components/schemas/PuzzleFileInfo"
-          },
-          "answerText": {
-            "type": "string",
-            "nullable": true
-          },
-          "isCorrect": {
-            "type": "boolean"
-          }
-        },
-        "additionalProperties": false
-      },
-      "FillBlankMatchVM": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "parentQuestionId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "questionText": {
-            "type": "string",
-            "nullable": true
-          },
-          "answerText": {
-            "type": "string",
-            "nullable": true
-          },
-          "index": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "studentAnswer": {
             "type": "string",
             "nullable": true
           }
@@ -39022,364 +39875,6 @@
           "quizId": {
             "type": "string",
             "format": "uuid"
-          }
-        },
-        "additionalProperties": false
-      },
-      "QuizQuestionViewModel": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "quizId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "questionText": {
-            "type": "string",
-            "nullable": true
-          },
-          "questionHtml": {
-            "type": "string",
-            "nullable": true
-          },
-          "questionImage": {
-            "type": "string",
-            "nullable": true
-          },
-          "addedToBank": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "type": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "answers": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/QuestionAnswerVM"
-            },
-            "nullable": true
-          },
-          "fillBlankMatchQuestions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FillBlankMatchVM"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "QuizViewModel": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "quizName": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "timeLimit": {
-            "type": "number",
-            "format": "double"
-          },
-          "trialsNumber": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "topResult": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "passingScore": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "showResultView": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "randomQuestion": {
-            "type": "boolean"
-          },
-          "deadlineDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "publishDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "masterQuizID": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "moduleId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "moduleIndex": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "programId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "programScheduleId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "programLectureId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "courseId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "editable": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "questions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/QuizQuestionViewModel"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "QuizViewModelSwaggerOutput": {
-        "type": "object",
-        "properties": {
-          "statusCode": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "ok": {
-            "type": "boolean"
-          },
-          "result": {
-            "$ref": "#/components/schemas/QuizViewModel"
-          }
-        },
-        "additionalProperties": false
-      },
-      "AddQuizQuestionViewModel": {
-        "type": "object",
-        "properties": {
-          "questionAnswerId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "quizId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "questionText": {
-            "type": "string",
-            "nullable": true
-          },
-          "questionHtml": {
-            "type": "string",
-            "nullable": true
-          },
-          "questionImage": {
-            "type": "string",
-            "nullable": true
-          },
-          "newQuestionImage": {
-            "$ref": "#/components/schemas/PuzzleFileInfo"
-          },
-          "type": {
-            "$ref": "#/components/schemas/QuestionType"
-          },
-          "answers": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/QuestionAnswerVM"
-            },
-            "nullable": true
-          },
-          "addToQuestionBank": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "answerMatches": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AnswerMatchesVM"
-            },
-            "nullable": true
-          },
-          "questionMatches": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/QuestionMatchesOrFillBlankVM"
-            },
-            "nullable": true
-          },
-          "fillBlank": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/QuestionMatchesOrFillBlankVM"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "AddEditQuizViewModel": {
-        "required": [
-          "quizName"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "quizName": {
-            "maxLength": 250,
-            "type": "string"
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "moduleId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "moduleIndex": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "programId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "programScheduleId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "programLectureId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "timeLimit": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "trialsNumber": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "topResult": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "passingScore": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "showResultView": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "randomQuestion": {
-            "type": "boolean"
-          },
-          "deadlineDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "publishDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "questions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AddQuizQuestionViewModel"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "QuizEnglishList": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "QuizEnglishListListSwaggerOutput": {
-        "type": "object",
-        "properties": {
-          "statusCode": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "ok": {
-            "type": "boolean"
-          },
-          "result": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/QuizEnglishList"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": false
@@ -42452,6 +42947,11 @@
           },
           "quizStatus": {
             "type": "string",
+            "nullable": true
+          },
+          "quizStudentId": {
+            "type": "string",
+            "format": "uuid",
             "nullable": true
           }
         },
